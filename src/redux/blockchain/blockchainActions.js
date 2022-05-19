@@ -50,6 +50,7 @@ export const connect = () => {
     const CONFIG = await configResponse.json();
     const { ethereum } = window;
     const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
+
     if (metamaskIsInstalled) {
       Web3EthContract.setProvider(ethereum);
       let web3 = new Web3(ethereum);
@@ -65,11 +66,15 @@ export const connect = () => {
             abi,
             CONFIG.CONTRACT_ADDRESS
           );
+
+          let currentStatus = await SmartContractObj.methods.paused.call();
+
           dispatch(
             connectSuccess({
               account: accounts[0],
               smartContract: SmartContractObj,
               web3: web3,
+              collectionStatus: currentStatus
             })
           );
           // Add listeners start

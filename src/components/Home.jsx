@@ -4,7 +4,7 @@ import { connect } from "../redux/blockchain/blockchainActions";
 import { fetchData } from "../redux/data/dataActions";
 import * as s from "../styles/globalStyles";
 import styled from "styled-components";
-import Status from "./Status";
+import LaunchDate from "./LaunchDate";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -204,7 +204,12 @@ function Home() {
         >
           <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
           <s.SpacerSmall />
-          <Status />
+          {blockchain.collectionStatus !== null && (
+                <s.TextTitle>
+                    Collection status: {blockchain.collectionStatus ? 'ACTIVE' : 'PAUSED'}
+                </s.TextTitle>
+            )}
+          <LaunchDate />
           <s.SpacerSmall />
           <ResponsiveWrHomeer flex={1} style={{ padding: 24 }} test>
             <s.Container flex={1} jc={"center"} ai={"center"}>
