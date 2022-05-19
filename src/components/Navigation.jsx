@@ -3,18 +3,16 @@ import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { shortenAddress } from "../util";
 
 const Navigation = styled.header`
   width: 100%;
-  border-bottom: 10px solid #222;
   z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 100px 0;
   height: 140px;
-  margin-bottom: 60px;
-  background: #f8f8f8;
 
   .logo a {
     padding-top: 33px;
@@ -29,9 +27,10 @@ const Navigation = styled.header`
       display: block;
     }
     em {
-      font-size: 0.5em;
+      font-size: 1em;
       float: left;
       display: block;
+      color: blue;
       img {
         display: inline-block;
         margin-top: 5px;
@@ -85,13 +84,6 @@ const Navigation = styled.header`
     }
   }
 
-  @media only screen and (max-width: 800px) {
-    padding: 0px;
-    .logo {
-      padding-left: 15px;
-      padding-top: 0px !important;
-    }
-  }
   
   @media only screen and (max-width:  768px) {
     height: auto;
@@ -156,6 +148,7 @@ const Navigation = styled.header`
 
 function Nav() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const blockchain = useSelector((state) => state.blockchain);
 
   function handleToggle() { 
     setIsExpanded(!isExpanded);
@@ -168,8 +161,7 @@ function Nav() {
             <p>NFT PINTXO</p>
             <em>
               <div className="letterhead">
-                <span className="name">0xf3435...</span>
-                <span className="gray">.io</span>
+                <span className="name">{blockchain.account !== null && shortenAddress(blockchain.account)}</span>
               </div>
             </em>
           </Link>

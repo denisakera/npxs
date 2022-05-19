@@ -4,6 +4,7 @@ import { connect } from "../redux/blockchain/blockchainActions";
 import { fetchData } from "../redux/data/dataActions";
 import * as s from "../styles/globalStyles";
 import styled from "styled-components";
+import Status from "./Status";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -80,10 +81,10 @@ export const StyledImg = styled.img`
   background-color: var(--accent);
   border-radius: 100%;
   width: 200px;
-  @media (min-width: 900px) {
+  @media (min-width: 768px) {
     width: 250px;
   }
-  @media (min-width: 1000px) {
+  @media (min-width: 1024px) {
     width: 300px;
   }
   transition: width 0.5s;
@@ -198,10 +199,12 @@ function Home() {
         <s.Container
           flex={1}
           ai={"center"}
-          style={{ padding: 24, backgroundColor: "var(--primary)" }}
+          style={{ padding: 24, backgroundColor: "#cecece" }}
           image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
         >
           <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
+          <s.SpacerSmall />
+          <Status />
           <s.SpacerSmall />
           <ResponsiveWrHomeer flex={1} style={{ padding: 24 }} test>
             <s.Container flex={1} jc={"center"} ai={"center"}>
