@@ -71,7 +71,7 @@ export const connect = () => {
           
           let currentStatus = await SmartContractObj.methods.paused().call({ from: accounts[0] });
           let dateOfLaunch = await SmartContractObj.methods.launchTimestamp().call({ from: accounts[0] });
-          let assets = await getNftTokens(accounts[0]);
+          //let assets = await getNftTokens(accounts[0]);
 
           dispatch(
             connectSuccess({
@@ -80,7 +80,7 @@ export const connect = () => {
               web3: web3,
               collectionStatus: currentStatus,
               launchDate: dateOfLaunch,
-              nfts: assets
+              // nfts: assets
             })
           );
           // Add listeners start
@@ -105,8 +105,8 @@ export const connect = () => {
 
 export const updateAccount = (account) => {
   return async (dispatch) => {
-    let assets = await getNftTokens(account);
-    dispatch(updateAccountRequest({ account: account, nfts: assets }));
+    //let assets = await getNftTokens(account);
+    dispatch(updateAccountRequest({ account: account }));
     dispatch(fetchData(account));
   };
 };

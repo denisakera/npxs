@@ -2,6 +2,7 @@ import * as s from '../styles/globalStyles'
 import styled from 'styled-components';
 
 const LeaderBoard = () => {
+
     return (
         <s.Screen style={{ backgroundColor: "#cecece" }}>
             <s.TextTitle>
@@ -9,9 +10,9 @@ const LeaderBoard = () => {
             </s.TextTitle>
             <s.SpacerMedium />
             <s.Container style={{ backgroundColor: "#cecece" }}>
-                {dummyAddresses.slice(0, 10).map((addr) => (
-                    <Address address={addr} />
-                ))}
+                {dummyAddresses.slice(0, 10).map((addr) => {
+                    return <Address address={addr} />
+                })}
             </s.Container>
             <s.SpacerLarge />
         </s.Screen>
@@ -22,17 +23,27 @@ const AddressWrapper = styled.div`
     border-left: 5px;
     border-style: solid;
     margin: 10px 0;
-    padding: 3px;
+    padding: 3px 5px;
 `;
 
 const Address = ({ address }) => {
+
+    let myAddress = "0x062d6d315e6c8aa196b9072d749e3f3f3579fdd0";
+
     return (
-        <AddressWrapper>
-            <s.TextTitle>
+        <AddressWrapper style={{ 
+            borderColor: myAddress.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
+            }}>
+            <s.TextTitle 
+            style={{ 
+                color: myAddress.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
+                borderColor: myAddress.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
+                }}>
                 {address}
             </s.TextTitle>
-            <s.TextTitle style={{ fontSize: 18 }}>
-               Quantity: {}
+            <s.TextTitle 
+            style={{ fontSize: 18,  color: myAddress.toLowerCase() === address.toLowerCase() ? 'blue' : 'black' }}>
+                Quantity: {4}
             </s.TextTitle>
         </AddressWrapper>
     )
