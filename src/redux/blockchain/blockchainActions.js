@@ -3,6 +3,7 @@ import Web3EthContract from "web3-eth-contract";
 import Web3 from "web3";
 // log
 import { fetchData } from "../data/dataActions";
+import { getNftTokens } from "../../api";
 
 const connectRequest = () => {
   return {
@@ -54,6 +55,7 @@ export const connect = () => {
     if (metamaskIsInstalled) {
       Web3EthContract.setProvider(ethereum);
       let web3 = new Web3(ethereum);
+
       try {
         const accounts = await ethereum.request({
           method: "eth_requestAccounts",
@@ -66,15 +68,19 @@ export const connect = () => {
             abi,
             CONFIG.CONTRACT_ADDRESS
           );
-
-          let currentStatus = await SmartContractObj.methods.paused.call();
+          
+          let currentStatus = await SmartContractObj.methods.paused().call({ from: accounts[0] });
+          let dateOfLaunch = await SmartContractObj.methods.launchTimestamp().call({ from: accounts[0] });
+          let assets = await getNftTokens(accounts[0]);
 
           dispatch(
             connectSuccess({
               account: accounts[0],
               smartContract: SmartContractObj,
               web3: web3,
-              collectionStatus: currentStatus
+              collectionStatus: currentStatus,
+              launchDate: dateOfLaunch,
+              nfts: assets
             })
           );
           // Add listeners start
@@ -99,7 +105,9 @@ export const connect = () => {
 
 export const updateAccount = (account) => {
   return async (dispatch) => {
-    dispatch(updateAccountRequest({ account: account }));
+    let assets = await getNftTokens(account);
+    dispatch(updateAccountRequest({ account: account, nfts: assets }));
     dispatch(fetchData(account));
   };
 };
+
