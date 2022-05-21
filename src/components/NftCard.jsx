@@ -8,6 +8,7 @@ const CardWrapper = styled.div`
   padding: 0 0 32px;
   margin: 48px 24px 12px 0;
   height: 280px;
+  width: 256px;
   font-family: Quicksand, arial, sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;

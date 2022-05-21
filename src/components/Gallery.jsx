@@ -9,34 +9,11 @@ import { useSelector } from "react-redux";
 const ResponsiveWrapper = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
   
-
-  @media (min-width: 767px) {
-    flex-direction: row;
-  }
 `;
 
-let dummy = [{
-    permalink: 'https://testnets.opensea.io/assets/rinkeby/0x9b407ed04365862abc5363f301a2e5efa13ef2ff/4785',
-    name: 'Univel Suite #47S5001',
-    image_preview_url: img,
-    collection: {
-        slug: 'pt'
-    },
-    token_id: 123
-},
-{
-    permalink: 'https://testnets.opensea.io/assets/rinkeby/0x9b407ed04365862abc5363f301a2e5efa13ef2ff/4785',
-    name: 'Univel Suite #47S5001',
-    image_preview_url: img,
-    collection: {
-        slug: 'pt'
-    },
-    token_id: 123
-}]
 const Gallery = () => {
     const [myNfts, setMyNfts] = useState(dummy);
     const blockchain = useSelector((state) => state.blockchain);
@@ -70,3 +47,57 @@ const Gallery = () => {
 }
 
 export default Gallery;
+
+
+let dummy = [{
+    permalink: 'https://testnets.opensea.io/assets/rinkeby/0x9b407ed04365862abc5363f301a2e5efa13ef2ff/4785',
+    name: 'Univel Suite #47S5001',
+    image_preview_url: img,
+    collection: {
+        slug: 'pt'
+    },
+    token_id: 123
+},
+{
+    permalink: 'https://testnets.opensea.io/assets/rinkeby/0x9b407ed04365862abc5363f301a2e5efa13ef2ff/4785',
+    name: 'Univel Suite #47S5001',
+    image_preview_url: img,
+    collection: {
+        slug: 'pt'
+    },
+    token_id: 123
+},{
+    permalink: 'https://testnets.opensea.io/assets/rinkeby/0x9b407ed04365862abc5363f301a2e5efa13ef2ff/4785',
+    name: 'Univel Suite #47S5001',
+    image_preview_url: img,
+    collection: {
+        slug: 'pt'
+    },
+    token_id: 123
+},
+{
+    permalink: 'https://testnets.opensea.io/assets/rinkeby/0x9b407ed04365862abc5363f301a2e5efa13ef2ff/4785',
+    name: 'Univel Suite #47S5001',
+    image_preview_url: img,
+    collection: {
+        slug: 'pt'
+    },
+    token_id: 123
+},{
+    permalink: 'https://testnets.opensea.io/assets/rinkeby/0x9b407ed04365862abc5363f301a2e5efa13ef2ff/4785',
+    name: 'Univel Suite #47S5001',
+    image_preview_url: img,
+    collection: {
+        slug: 'pt'
+    },
+    token_id: 123
+},
+{
+    permalink: 'https://testnets.opensea.io/assets/rinkeby/0x9b407ed04365862abc5363f301a2e5efa13ef2ff/4785',
+    name: 'Univel Suite #47S5001',
+    image_preview_url: img,
+    collection: {
+        slug: 'pt'
+    },
+    token_id: 123
+}];

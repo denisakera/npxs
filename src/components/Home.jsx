@@ -61,7 +61,7 @@ export const ResponsiveWrHomeer = styled.div`
   justify-content: stretched;
   align-items: stretched;
   width: 100%;
-  @media (min-width: 767px) {
+  @media (min-width: 942px) {
     flex-direction: row;
   }
 `;

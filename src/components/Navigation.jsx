@@ -23,7 +23,6 @@ const Navigation = styled.header`
     text-decoration: none;
 
     p {
-      width: 500px;
       display: block;
     }
     em {
@@ -84,7 +83,6 @@ const Navigation = styled.header`
     }
   }
 
-  
   @media only screen and (max-width:  768px) {
     height: auto;
     min-height: 50px;
@@ -95,7 +93,6 @@ const Navigation = styled.header`
       display: block;
       padding-top: 20px;
       margin: 0px;
-      margin-left: -5px;
       a {
         padding: 20px 0px;
       }
@@ -103,7 +100,7 @@ const Navigation = styled.header`
     .fa-bars {
       display: inline-block;
       position: absolute;
-      top: 10px;
+      top: 32px;
       right: 10px;
       cursor: pointer;
     }
@@ -150,42 +147,44 @@ function Nav() {
   const [isExpanded, setIsExpanded] = useState(false);
   const blockchain = useSelector((state) => state.blockchain);
 
-  function handleToggle() { 
+  function handleToggle() {
     setIsExpanded(!isExpanded);
   }
-  
-    return (
-      <Navigation>
-        <div className="logo">
-          <Link to="/">
-            <p>NFT PINTXO</p>
-            <em>
-              <div className="letterhead">
-                <span className="name">{blockchain.account !== null && shortenAddress(blockchain.account)}</span>
-              </div>
-            </em>
-          </Link>
-        </div>
-        <nav className="nav">
-          <GiHamburgerMenu
-            className="fa fa-bars"
-            aria-hidden="true"
-            onClick={handleToggle}
-          />
-          <ul className={`collapsed ${isExpanded ? "is-expanded" : ""}`}>
-            <NavLink activeClassName="active" to="/">
-              <li>Mint</li>
-            </NavLink>
-            <NavLink activeClassName="active" to="/Gallery">
-              <li>Gallery</li>
-            </NavLink>
-            <NavLink activeClassName="active" to="/LeaderBoard">
-              <li>LeaderBoard</li>
-            </NavLink>
-          </ul>
-        </nav>
-      </Navigation>
-    );
-  }
+
+  return (
+    <Navigation>
+      <div className="logo">
+        <Link to="/">
+          <p>NFT PINTXO</p>
+          <em>
+            <div className="letterhead">
+              <span className="name">
+                {blockchain.account !== null && shortenAddress(blockchain.account)}
+              </span>
+            </div>
+          </em>
+        </Link>
+      </div>
+      <nav className="nav">
+        <GiHamburgerMenu
+          className="fa fa-bars"
+          aria-hidden="true"
+          onClick={handleToggle}
+        />
+        <ul className={`collapsed ${isExpanded ? "is-expanded" : ""}`}>
+          <NavLink activeClassName="active" to="/">
+            <li>Mint</li>
+          </NavLink>
+          <NavLink activeClassName="active" to="/Gallery">
+            <li>Gallery</li>
+          </NavLink>
+          <NavLink activeClassName="active" to="/LeaderBoard">
+            <li>LeaderBoard</li>
+          </NavLink>
+        </ul>
+      </nav>
+    </Navigation>
+  );
+}
 
 export default Nav;

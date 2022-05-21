@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const getNftTokens = async (ownerAddress) => {
   fetch(
     `https://api.opensea.io/api/v1/assets?owner=${ownerAddress}&order_direction=desc&offset=0&limit=30`,
@@ -6,13 +8,10 @@ export const getNftTokens = async (ownerAddress) => {
     return assets;
   })
 }
- 
-export const getTopOwnerShips = async (contractAddress, tokenId) => {
-  fetch(
-    `https://testnets-api.opensea.io/api/v1/asset/${contractAddress}/${tokenId}/`,
-    { method: "GET", headers: { Accept: "application/json" } }
-  ).then(response => response.json()).then(({ top_ownerships }) => {
-    return top_ownerships;
-  })
+
+export const getTopOwnerShips = async () => {
+  axios.get("https://vrdust.org.uk/cache/leaderboard.json")
+    .then(({ data }) => {
+      return data;
+    })
 }
- 

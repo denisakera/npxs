@@ -6,7 +6,8 @@ const initialState = {
   errorMsg: "",
   collectionStatus: null,
   dateOfLaunch: null,
-  nfts: []
+  nfts: [],
+  holders: []
 };
 
 const blockchainReducer = (state = initialState, action) => {
@@ -25,7 +26,8 @@ const blockchainReducer = (state = initialState, action) => {
         web3: action.payload.web3,
         collectionStatus: action.payload.collectionStatus,
         dateOfLaunch: action.payload.launchDate,
-        nfts: action.payload.assets  
+        nfts: action.payload.assets,
+        holders: action.payload.holders  
       };
     case "CONNECTION_FAILED":
       return {
