@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import img from './test.jpg'
 import * as s from '../styles/globalStyles';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 

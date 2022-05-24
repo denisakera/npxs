@@ -1,10 +1,10 @@
 {
   "CONTRACT_ADDRESS": "0xBCC081Df56f3130E720cf54f6c95bE79fFf5A7f9",
-  "SCAN_LINK": "https://polygonscan.com/token/0xBCC081Df56f3130E720cf54f6c95bE79fFf5A7f9",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0xbcc081df56f3130e720cf54f6c95be79fff5a7f9",
   "NETWORK": {
-    "NAME": "Polygon",
-    "SYMBOL": "Matic",
-    "ID": 80001
+    "NAME": "Rinkeby",
+    "SYMBOL": "ETH",
+    "ID": 4
   },
   "NFT_NAME": "Nerdy Coder Clones",
   "SYMBOL": "NCC",

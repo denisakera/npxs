@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Gallery from "./components/Gallery";
 import LeaderBoard from "./components/LeaderBoard";
 import styled from "styled-components";
+import UsersNfts from './components/UsersNfts';
 import { useSelector } from "react-redux";
 
 const AppWrapper = styled.div`
@@ -23,10 +24,11 @@ const App = () => {
   return (
     <Router>
       <AppWrapper style={{ backgroundColor: "#cecece" }}>
-        {address !== null && <Nav />}
+        <Nav />
         <Routes className="container">
           <Route path="/" element={<Home />} />
           <Route path="/Gallery" element={<Gallery />} />
+          <Route path="/Gallery/:address" element={<UsersNfts />} />
           <Route path="/LeaderBoard" element={<LeaderBoard />} />
         </Routes>
       </AppWrapper>

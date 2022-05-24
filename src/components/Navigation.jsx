@@ -166,22 +166,27 @@ function Nav() {
         </Link>
       </div>
       <nav className="nav">
-        <GiHamburgerMenu
+        {blockchain.account !== null && (
+          <>
+          <GiHamburgerMenu
           className="fa fa-bars"
           aria-hidden="true"
           onClick={handleToggle}
         />
         <ul className={`collapsed ${isExpanded ? "is-expanded" : ""}`}>
-          <NavLink activeClassName="active" to="/">
+          <NavLink to="/">
             <li>Mint</li>
           </NavLink>
-          <NavLink activeClassName="active" to="/Gallery">
+          <NavLink to="/Gallery">
             <li>Gallery</li>
           </NavLink>
-          <NavLink activeClassName="active" to="/LeaderBoard">
+          <NavLink to="/LeaderBoard">
             <li>LeaderBoard</li>
           </NavLink>
         </ul>
+        </>
+        )}
+        
       </nav>
     </Navigation>
   );
