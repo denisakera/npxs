@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "../redux/blockchain/blockchainActions";
 import { fetchData } from "../redux/data/dataActions";
 import * as s from "../styles/globalStyles";
 import styled from "styled-components";
 import LaunchDate from "./LaunchDate";
+import { checkHolderExists, createNewHolder, updateHolder } from "../firebase";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -145,6 +146,16 @@ function Home() {
         })
         .then((receipt) => {
           console.log(receipt);
+          const { from } = receipt;
+
+          checkHolderExists(from).then((result) => {
+            if (result) {
+              updateHolder(from, mintAmount);
+            } else {
+              createNewHolder(from, mintAmount, "none");
+            }
+          })
+            
           setFeedback(
             `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
           );
@@ -199,6 +210,7 @@ function Home() {
         <s.Container
           flex={1}
           ai={"center"}
+          jc={"center"}
           style={{ padding: 24, backgroundColor: "#cecece" }}
           image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
         >

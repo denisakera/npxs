@@ -14,14 +14,15 @@ export const ResponsiveWrapper = styled.div`
 
 const Gallery = () => {
     const blockchain = useSelector((state) => state.blockchain);
+    const { account, nfts } = blockchain;
     
     return (
         <s.Screen style={{ backgroundColor: "#cecece" }}>
             <s.TextTitle>
-                {blockchain.account !== null && shortenAddress(blockchain.account)}
+                {account !== null && shortenAddress(account)}
             </s.TextTitle>
             <s.TextDescription>
-                Found {blockchain.nfts?.length} NFTS..
+                Found {nfts.length} NFTS..
             </s.TextDescription>
             <s.Container
                 flex={1}
@@ -30,11 +31,11 @@ const Gallery = () => {
             //image={"/config/images/bg.png"}
             >
                 <ResponsiveWrapper>
-                    {blockchain.nfts?.length === 0 ? (
+                    {nfts.length === 0 ? (
                         <p>No NFTs found!</p>
                     ) : (
-                        blockchain.nfts?.map((nft) => (
-                            <NFTCard {...nft} />
+                        nfts.map((nft) => (
+                            <NFTCard key={nft.id} {...nft} />
                         ))
                     )}
                 </ResponsiveWrapper>

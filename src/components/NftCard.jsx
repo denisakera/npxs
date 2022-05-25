@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import * as s from '../styles/globalStyles';
-import { AiOutlineExclamationCircle } from 'react-icons/ai';
+import { AiOutlineLink } from 'react-icons/ai';
+import { HiExternalLink } from 'react-icons/hi';
+
 
 const CardWrapper = styled.div`
   overflow: hidden;
@@ -11,6 +13,7 @@ const CardWrapper = styled.div`
   font-family: Quicksand, arial, sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
+
 `;
 
 const CardImage = styled.div`
@@ -20,11 +23,18 @@ const CardImage = styled.div`
   width: 256px;
   height: 210px;
   background-size: cover;
+  transition: width 0.3s;
+  transition: height 0.3s;
+
+  &:hover {
+    width: 260px;
+    height: 214px;
+  }
 `;
 
 const StyledLink = styled.div`
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   padding: 5px 5px;
 `;
 
@@ -38,7 +48,10 @@ const NFTCard = ({ name, collection, permalink, image_preview_url, token_id}) =>
         <hr style={{ marginTop: 8 }} />
         <StyledLink>
         <a target="_blank" href={permalink}>
-          <AiOutlineExclamationCircle />
+          <HiExternalLink style={{ color: 'blue' }} />
+        </a>
+        <a target="_blank" href={permalink}>
+          <AiOutlineLink style={{ color: 'blue' }} />
         </a>
         </StyledLink>
         </CardWrapper>

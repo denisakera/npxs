@@ -3,7 +3,7 @@ import Web3EthContract from "web3-eth-contract";
 import Web3 from "web3";
 // log
 import { fetchData } from "../data/dataActions";
-import { getNftTokens, getTopOwnerShips } from "../../api";
+import { getNftTokens } from "../../api";
 
 const connectRequest = () => {
   return {
@@ -71,10 +71,8 @@ export const connect = () => {
           
           let currentStatus = await SmartContractObj.methods.paused().call({ from: accounts[0] });
           let dateOfLaunch = await SmartContractObj.methods.launchTimestamp().call({ from: accounts[0] });
-          let assets = await getNftTokens(accounts[0]);
+          let assets = await getNftTokens(accounts[0]); 
           
-          let holders = await getTopOwnerShips()
-
           dispatch(
             connectSuccess({
               account: accounts[0],
@@ -82,7 +80,6 @@ export const connect = () => {
               web3: web3,
               collectionStatus: currentStatus,
               launchDate: dateOfLaunch,
-              holders: holders,
               nfts: assets
             })
           );
