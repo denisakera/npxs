@@ -14,14 +14,27 @@ export const createNewHolder = async (address, num, ens) => {
 }
 
 export const updateHolder = async (address, num) => {
-    const userDoc = doc(db, "holders", address);
+    const { id, pieces_owned } = await findByAddress(address);
+
+    const userDoc = doc(db, "holders", id);
 
     const updatedFields = { pieces_owned: pieces_owned + num };
     await updateDoc(userDoc, updatedFields);
 }
 
-export const checkHolderExists = async (address) => {
-    const docRef = doc(db, "holders", address);
+export const checkHolderExists = async (id) => {
+    
+    const docRef = doc(db, "holders", id);
     const docSnap = await getDoc(docRef);
     return docSnap.exists();
+}
+
+export const findByAddress = async (addr) => {
+    let holders = await getHolders();
+    let holder = holders.find(element => element.address.toLowerCase() === addr.toLowerCase());
+    if (holder === undefined) {
+        return false;
+    } else {
+        return holder;
+    }
 }

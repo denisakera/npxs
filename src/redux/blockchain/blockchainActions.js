@@ -32,6 +32,13 @@ const updateAccountRequest = (payload) => {
   };
 };
 
+const updateGallery = (payload) => {
+  return {
+    type: "UPDATE_GALLERY",
+    payload: payload
+  }
+}
+
 export const connect = () => {
   return async (dispatch) => {
     dispatch(connectRequest());
@@ -110,3 +117,10 @@ export const updateAccount = (account) => {
     dispatch(fetchData(account));
   };
 };
+
+export const galleryUpdate = (account) => {
+  return async (dispatch) => {
+    let assets = await getNftTokens(account);
+    dispatch(updateGallery({ nfts: assets }));
+  }
+}

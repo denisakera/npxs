@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import NFTCard from "./NftCard";
 import { shortenAddress } from "../util";
 import { useSelector } from "react-redux";
+import { checkHolderExists, findByAddress, updateHolder } from "../firebase";
 
 export const ResponsiveWrapper = styled.div`
   display: flex;
@@ -39,6 +40,9 @@ const Gallery = () => {
                         ))
                     )}
                 </ResponsiveWrapper>
+                <button onClick={() => {
+                    updateHolder('0xFf43d7Fcd1Ac9B35C1004611FfC8A59F6B1BF940', 1).then(res => console.log(res))
+                }}>Click</button>
             </s.Container>
         </s.Screen>
     )

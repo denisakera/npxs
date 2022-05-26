@@ -25,7 +25,7 @@ const blockchainReducer = (state = initialState, action) => {
         web3: action.payload.web3,
         collectionStatus: action.payload.collectionStatus,
         dateOfLaunch: action.payload.launchDate,
-        nfts: [...action.payload.nfts]  
+        nfts: [...action.payload.nfts]
       };
     case "CONNECTION_FAILED":
       return {
@@ -37,7 +37,13 @@ const blockchainReducer = (state = initialState, action) => {
       return {
         ...state,
         account: action.payload.account,
-        nfts: action.payload.nfts,
+        nfts: [...action.payload.nfts],
+      };
+
+    case "UPDATE_GALLERY":
+      return {
+        ...state,
+        nfts: [...action.payload.nfts],
       };
     default:
       return state;
