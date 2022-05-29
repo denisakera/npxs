@@ -4,6 +4,7 @@ const initialState = {
   cost: 0,
   error: false,
   errorMsg: "",
+  netId: null
 };
 
 const dataReducer = (state = initialState, action) => {
@@ -20,9 +21,10 @@ const dataReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         totalSupply: action.payload.totalSupply,
-        // cost: action.payload.cost,
+        cost: action.payload.cost,
         error: false,
         errorMsg: "",
+        netId: action.payload.netId
       };
     case "CHECK_DATA_FAILED":
       return {

@@ -5,6 +5,9 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { shortenAddress } from "../util";
+import Jazzicon from 'react-jazzicon';
+import { connect } from '../redux/blockchain/blockchainActions';
+import { StyledButton } from "./Home";
 
 const Navigation = styled.header`
   width: 100%;
@@ -65,6 +68,7 @@ const Navigation = styled.header`
     ul {
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
     li {
       margin: 0 15px;
@@ -109,6 +113,7 @@ const Navigation = styled.header`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      align-items: start;
       flex-wrap: wrap;
 
       overflow: hidden;
@@ -143,32 +148,53 @@ const Navigation = styled.header`
   }
 `;
 
+const Button = styled.button`
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+  padding: 8px 10px;
+  margin: 0px 0px;
+  width: 100%;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+`
+
+const DivAddress = styled.div`
+  border: 1px solid;
+  padding: 5px 10px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
 function Nav() {
   const [isExpanded, setIsExpanded] = useState(false);
   const blockchain = useSelector((state) => state.blockchain);
+  const data = useSelector((state) => state.data);
+  const dispatch = useDispatch();
 
   function handleToggle() {
     setIsExpanded(!isExpanded);
   }
+
+  const getData = () => {
+    if (blockchain.account !== null && blockchain.smartContract !== null) {
+      dispatch(fetchData(blockchain.account));
+    }
+  };
 
   return (
     <Navigation>
       <div className="logo">
         <Link to="/">
           <p>NFT PINTXO</p>
-          <em>
-            <div className="letterhead">
-              <span className="name">
-                {blockchain.account !== null && shortenAddress(blockchain.account)}
-              </span>
-            </div>
-          </em>
         </Link>
       </div>
       <nav className="nav">
-        {blockchain.account !== null && (
-          <>
-          <GiHamburgerMenu
+        <GiHamburgerMenu
           className="fa fa-bars"
           aria-hidden="true"
           onClick={handleToggle}
@@ -183,10 +209,34 @@ function Nav() {
           <NavLink to="/LeaderBoard">
             <li>LeaderBoard</li>
           </NavLink>
+          {!blockchain.account ? (
+            <StyledButton 
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(connect());
+              getData();
+            }}
+
+            >Connect</StyledButton>
+          ) : (
+            <>
+              {Number(blockchain.networkId) === Number(data.netId) ? (
+                <DivAddress>
+                  {shortenAddress(blockchain.account)}
+                  <div style={{ marginLeft: 8 }}>
+                    <Jazzicon diameter={25} seed={blockchain.jazicion} />
+                  </div>
+                </DivAddress>
+              ) : (
+                <DivAddress style={{
+                  color: 'red'
+                }}>
+                  Wrong Network
+                </DivAddress>
+              )}
+            </>
+          )}
         </ul>
-        </>
-        )}
-        
       </nav>
     </Navigation>
   );

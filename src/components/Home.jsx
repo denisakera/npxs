@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { connect, galleryUpdate } from "../redux/blockchain/blockchainActions";
+import { checkIfWalletIsConnect, connect, galleryUpdate } from "../redux/blockchain/blockchainActions";
 import { fetchData } from "../redux/data/dataActions";
 import * as s from "../styles/globalStyles";
 import styled from "styled-components";
 import LaunchDate from "./LaunchDate";
 import { checkHolderExists, createNewHolder, findByAddress, updateHolder } from "../firebase";
+import { getConfigData } from "../redux/blockchain/util";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -163,7 +164,7 @@ function Home() {
     setClaimingNft(false);
     dispatch(fetchData(blockchain.account));
     dispatch(galleryUpdate(blockchain.account));
-    
+
   };
 
   const decrementMintAmount = () => {
@@ -188,25 +189,18 @@ function Home() {
     }
   };
 
-  const getConfig = async () => {
-    const configResponse = await fetch("/config/config.json", {
-      headers: {
-        "Content-Type": "Homelication/json",
-        Accept: "Homelication/json",
-      },
-    });
-    const config = await configResponse.json();
-    SET_CONFIG(config);
-  };
-
   useEffect(() => {
-    getConfig();
+    getConfigData().then((result) => {
+      SET_CONFIG(result);
+    });
+    dispatch(checkIfWalletIsConnect())
   }, []);
 
   useEffect(() => {
     getData();
   }, [blockchain.account]);
 
+  
   return (
     <s.Screen>
       <s.Container
@@ -217,12 +211,14 @@ function Home() {
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
         <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
-        <s.SpacerSmall />
-        {blockchain.collectionStatus !== null && (
+        <s.SpacerXSmall />
+        <div style={{ height: 32 }}>
+        {blockchain.account && (
           <s.TextTitle>
-            Collection status: {blockchain.collectionStatus ? 'ACTIVE' : 'PAUSED'}
-          </s.TextTitle>
+          Collection status: {blockchain.collectionStatus ? 'PAUSED' : 'ACTIVE'}
+        </s.TextTitle>
         )}
+        </div>
         <LaunchDate />
         <s.SpacerSmall />
         <ResponsiveWrHomeer flex={1} style={{ padding: 24 }} test>
@@ -250,7 +246,7 @@ function Home() {
                 color: "var(--accent-text)",
               }}
             >
-              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+              {!blockchain.account ? "_" : data.totalSupply} / {!blockchain.account ? "_" : CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
@@ -295,7 +291,7 @@ function Home() {
                   Excluding gas fees.
                 </s.TextDescription>
                 <s.SpacerSmall />
-                {blockchain.account === "" ||
+                {blockchain.account === null ||
                   blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
                     <s.TextDescription

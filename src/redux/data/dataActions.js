@@ -1,5 +1,6 @@
 // log
-import store from "../store";
+import { store } from "../store";
+import { getConfigData } from "../blockchain/util";
 
 const fetchDataRequest = () => {
   return {
@@ -25,19 +26,23 @@ export const fetchData = () => {
   return async (dispatch) => {
     dispatch(fetchDataRequest());
     try {
-      let totalSupply = await store
+     const totalSupply = await store
         .getState()
         .blockchain.smartContract.methods.totalSupply()
         .call();
-      // let cost = await store
-      //   .getState()
-      //   .blockchain.smartContract.methods.cost()
-      //   .call();
+      const cost = await store
+        .getState()
+        .blockchain.smartContract.methods.cost()
+        .call();
+
+      const CONFIG = await getConfigData();
+      const netId = CONFIG.NETWORK.ID;
 
       dispatch(
         fetchDataSuccess({
-          totalSupply,
-          // cost,
+          totalSupply: totalSupply,
+          cost: cost,
+          netId: netId
         })
       );
     } catch (err) {

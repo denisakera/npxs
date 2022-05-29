@@ -1,12 +1,14 @@
 const initialState = {
   loading: false,
   account: null,
+  jazicoin: Math.round(Math.random() * 10000000),
   smartContract: null,
   web3: null,
   errorMsg: "",
   collectionStatus: null,
   dateOfLaunch: null,
-  nfts: []
+  nfts: [],
+  networkId: null
 };
 
 const blockchainReducer = (state = initialState, action) => {
@@ -25,7 +27,8 @@ const blockchainReducer = (state = initialState, action) => {
         web3: action.payload.web3,
         collectionStatus: action.payload.collectionStatus,
         dateOfLaunch: action.payload.launchDate,
-        nfts: [...action.payload.nfts]
+        nfts: [...action.payload.nfts],
+        networkId: action.payload.networkId
       };
     case "CONNECTION_FAILED":
       return {
@@ -45,6 +48,25 @@ const blockchainReducer = (state = initialState, action) => {
         ...state,
         nfts: [...action.payload.nfts],
       };
+    case "PAGE_RELOAD":
+      return {
+        ...state,
+        account: action.payload.account,
+        nfts: [...action.payload.nfts],
+        smartContract: action.payload.smartContract,
+        web3: action.payload.web3,
+        collectionStatus: action.payload.collectionStatus,
+        dateOfLaunch: action.payload.launchDate,
+        networkId: action.payload.networkId
+      }  
+    
+    case "PAGE_RELOAD_FAIL":
+    return {
+      ...state,
+      account: action.payload.account,
+      networkId: action.payload.networkId
+    }
+
     default:
       return state;
   }

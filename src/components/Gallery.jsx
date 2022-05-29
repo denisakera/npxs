@@ -4,6 +4,9 @@ import NFTCard from "./NftCard";
 import { shortenAddress } from "../util";
 import { useSelector } from "react-redux";
 import { checkHolderExists, findByAddress, updateHolder } from "../firebase";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { checkIfWalletIsConnect } from "../redux/blockchain/blockchainActions";
 
 export const ResponsiveWrapper = styled.div`
   display: flex;
@@ -15,7 +18,12 @@ export const ResponsiveWrapper = styled.div`
 
 const Gallery = () => {
     const blockchain = useSelector((state) => state.blockchain);
+    const dispatch = useDispatch();
     const { account, nfts } = blockchain;
+    
+    useEffect(() => {
+        dispatch(checkIfWalletIsConnect());
+    }, []);
     
     return (
         <s.Screen style={{ backgroundColor: "#cecece" }}>
@@ -40,9 +48,6 @@ const Gallery = () => {
                         ))
                     )}
                 </ResponsiveWrapper>
-                <button onClick={() => {
-                    updateHolder('0xFf43d7Fcd1Ac9B35C1004611FfC8A59F6B1BF940', 1).then(res => console.log(res))
-                }}>Click</button>
             </s.Container>
         </s.Screen>
     )

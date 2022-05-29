@@ -1,9 +1,11 @@
 // constants
 import Web3EthContract from "web3-eth-contract";
 import Web3 from "web3";
-// log
 import { fetchData } from "../data/dataActions";
 import { getNftTokens } from "../../api";
+import { getABI, getConfigData, getSmartContractInstance } from "./util";
+
+const { ethereum } = window;
 
 const connectRequest = () => {
   return {
@@ -39,26 +41,27 @@ const updateGallery = (payload) => {
   }
 }
 
+const onPageReload = (payload) => {
+  return {
+    type: "PAGE_RELOAD",
+    payload: payload
+  }
+}
+
+const onPageReloadFail = (payload) => {
+  return {
+    type: "PAGE_RELOAD_FAIL",
+    payload: payload
+  }
+}
+
 export const connect = () => {
   return async (dispatch) => {
     dispatch(connectRequest());
-    const abiResponse = await fetch("/config/abi.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const abi = await abiResponse.json();
-    const configResponse = await fetch("/config/config.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const CONFIG = await configResponse.json();
-    const { ethereum } = window;
-    const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
 
+    const CONFIG = await getConfigData();
+
+    const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
     if (metamaskIsInstalled) {
       Web3EthContract.setProvider(ethereum);
       let web3 = new Web3(ethereum);
@@ -70,16 +73,14 @@ export const connect = () => {
         const networkId = await ethereum.request({
           method: "net_version",
         });
-        if (networkId == CONFIG.NETWORK.ID) {
-          const SmartContractObj = new Web3EthContract(
-            abi,
-            CONFIG.CONTRACT_ADDRESS
-          );
+        if (Number(networkId) === Number(CONFIG.NETWORK.ID)) {
           
+          const SmartContractObj = await getSmartContractInstance();
+
           let currentStatus = await SmartContractObj.methods.paused().call({ from: accounts[0] });
           let dateOfLaunch = await SmartContractObj.methods.launchTimestamp().call({ from: accounts[0] });
-          let assets = await getNftTokens(accounts[0]); 
-          
+          let assets = await getNftTokens(accounts[0]);
+
           dispatch(
             connectSuccess({
               account: accounts[0],
@@ -87,7 +88,8 @@ export const connect = () => {
               web3: web3,
               collectionStatus: currentStatus,
               launchDate: dateOfLaunch,
-              nfts: assets
+              nfts: assets,
+              networkId: networkId
             })
           );
           // Add listeners start
@@ -124,3 +126,39 @@ export const galleryUpdate = (account) => {
     dispatch(updateGallery({ nfts: assets }));
   }
 }
+
+export const checkIfWalletIsConnect = () => async (dispatch) => {
+
+  try {
+    if (!ethereum) return;
+    const accounts = await ethereum.request({ method: "eth_accounts" });
+    const networkId = await ethereum.request({
+      method: "net_version",
+    });
+    let web3 = new Web3(ethereum);
+    const CONFIG = await getConfigData();
+    
+    if (accounts.length && Number(networkId) === Number(CONFIG.NETWORK.ID)) {
+      const assets = await getNftTokens(accounts[0]);
+      const SmartContract = await getSmartContractInstance();
+      const currentStatus = await SmartContract.methods.paused().call({ from: accounts[0] });
+      const dateOfLaunch = await SmartContract.methods.launchTimestamp().call({ from: accounts[0] });
+         
+      dispatch(onPageReload({ 
+        account: accounts[0], 
+        nfts: assets, 
+        smartContract: SmartContract,
+        collectionStatus: currentStatus,
+        launchDate: dateOfLaunch,
+        web3: web3,
+        networkId: networkId 
+      }));
+
+    } else {
+      dispatch(onPageReloadFail({ networkId: networkId, account: accounts[0] }));
+    }
+  } catch (error) {
+    
+    console.log(error);
+  }
+};
