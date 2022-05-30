@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import * as s from '../styles/globalStyles';
 import { useSelector } from "react-redux";
-import { shortenAddress } from "../util";
+import { resolveEnsName, shortenAddress } from "../util";
 import QRCode from 'qrcode'
 import { useState, useEffect } from "react";
 
@@ -65,7 +65,7 @@ const Address = ({ address, pieces_owned }) => {
                         color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
                         borderColor: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
                     }}>
-                    {shortenAddress(address)}
+                    {resolveEnsName(address)}
                 </s.TextTitle>
                 <s.TextTitle
                     style={{ fontSize: 18, color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black' }}>

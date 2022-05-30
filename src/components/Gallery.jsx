@@ -28,7 +28,7 @@ const Gallery = () => {
     return (
         <s.Screen style={{ backgroundColor: "#cecece" }}>
             <s.TextTitle>
-                {account !== null && shortenAddress(account)}
+                {account && shortenAddress(account)}
             </s.TextTitle>
             <s.TextDescription>
                 Found {nfts.length} NFTS..

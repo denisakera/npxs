@@ -36,7 +36,8 @@ export const fetchData = () => {
         .call();
 
       const CONFIG = await getConfigData();
-      const netId = CONFIG.NETWORK.ID;
+      const netId = await store
+      .getState().blockchain.web3.utils.hexToNumber(CONFIG.NETWORK.ID);
 
       dispatch(
         fetchDataSuccess({

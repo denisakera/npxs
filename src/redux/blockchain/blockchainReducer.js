@@ -64,7 +64,11 @@ const blockchainReducer = (state = initialState, action) => {
     return {
       ...state,
       account: action.payload.account,
-      networkId: action.payload.networkId
+      networkId: action.payload.networkId,
+      web3: action.payload.web3,
+      collectionStatus: action.payload.collectionStatus,
+      dateOfLaunch: action.payload.launchDate,
+
     }
 
     default:

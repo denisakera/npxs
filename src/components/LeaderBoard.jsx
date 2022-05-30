@@ -9,7 +9,6 @@ import Loader from './Loader';
 const BoarderWrapper = styled.div`
     display: flex;
     flex-direction: column;
-
 `;
 
 const LeaderBoard = () => {

@@ -4,7 +4,10 @@
   "NETWORK": {
     "NAME": "Rinkeby",
     "SYMBOL": "ETH",
-    "ID": 4
+    "ID": "0x4",
+    "RPCURL": "https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+    "BLOCKURLS": "https://rinkey.etherscan.io",
+    "DECIMALS": 18
   },
   "NFT_NAME": "Nerdy Coder Clones",
   "SYMBOL": "NCC",

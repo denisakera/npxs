@@ -1,13 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { shortenAddress } from "../util";
 import Jazzicon from 'react-jazzicon';
-import { connect } from '../redux/blockchain/blockchainActions';
+import { connect, checkIfWalletIsConnect } from '../redux/blockchain/blockchainActions';
 import { StyledButton } from "./Home";
+import { fetchData } from "../redux/data/dataActions";
 
 const Navigation = styled.header`
   width: 100%;
@@ -176,6 +177,7 @@ function Nav() {
   const data = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
+
   function handleToggle() {
     setIsExpanded(!isExpanded);
   }
@@ -185,6 +187,14 @@ function Nav() {
       dispatch(fetchData(blockchain.account));
     }
   };
+
+  useEffect(() => {
+    dispatch(checkIfWalletIsConnect());
+  }, []);
+
+  useEffect(() => {
+    getData();
+  }, [blockchain.account]);
 
   return (
     <Navigation>
@@ -209,13 +219,16 @@ function Nav() {
           <NavLink to="/LeaderBoard">
             <li>LeaderBoard</li>
           </NavLink>
+          <NavLink to="/Ticket">
+            <li>Ticket</li>
+          </NavLink>
           {!blockchain.account ? (
-            <StyledButton 
-            onClick={(e) => {
-              e.preventDefault();
-              dispatch(connect());
-              getData();
-            }}
+            <StyledButton
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(connect());
+                getData();
+              }}
 
             >Connect</StyledButton>
           ) : (
@@ -229,9 +242,14 @@ function Nav() {
                 </DivAddress>
               ) : (
                 <DivAddress style={{
-                  color: 'red'
+                  color: 'red',
+                  cursor: 'pointer'
+                }} onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(connect());
+                  getData();
                 }}>
-                  Wrong Network
+                  Switch Network
                 </DivAddress>
               )}
             </>

@@ -1,5 +1,6 @@
 import { db } from '../firebase-config';
 import { collection, getDocs, addDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
+import { resolveEnsName } from '../util';
 
 const holdersRef = collection(db, "holders");
 
@@ -9,8 +10,9 @@ export const getHolders = async () => {
     return holders;
 }
 
-export const createNewHolder = async (address, num, ens) => {
-    await addDoc(holdersRef, { address: address, pieces_owned: num, ens_name: ens });
+export const createNewHolder = async (address, num) => {
+    const ensname = await resolveEnsName(address);
+    await addDoc(holdersRef, { address: address, pieces_owned: num, ens_name: ensname });
 }
 
 export const updateHolder = async (address, num) => {

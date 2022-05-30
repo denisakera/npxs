@@ -73,8 +73,9 @@ export const connect = () => {
         const networkId = await ethereum.request({
           method: "net_version",
         });
-        if (Number(networkId) === Number(CONFIG.NETWORK.ID)) {
-          
+
+        if (Number(networkId) === web3.utils.hexToNumber(CONFIG.NETWORK.ID)) {
+
           const SmartContractObj = await getSmartContractInstance();
 
           let currentStatus = await SmartContractObj.methods.paused().call({ from: accounts[0] });
@@ -101,7 +102,51 @@ export const connect = () => {
           });
           // Add listeners end
         } else {
-          dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}.`));
+          // Switch network here
+          try {
+            await ethereum.request({
+              method: "wallet_switchEthereumChain",
+              params: [{ chainId: CONFIG.NETWORK.ID }],
+            });
+
+            window.location.reload();
+
+          } catch (error) {
+            if (error.code === 4902) {
+              try {
+                await ethereum.request({
+                  method: "wallet_addEthereumChain",
+                  params: [
+                    {
+                      chainId: CONFIG.NETWORK.ID,
+                      chainName: CONFIG.NETWORK.NAME,
+                      rpcUrls: [CONFIG.NETWORK.RPCURL],
+                      nativeCurrency: {
+                        name: CONFIG.NETWORK.NAME,
+                        symbol: CONFIG.NETWORK.SYMBOL,
+                        decimals: CONFIG.NETWORK.DECIMALS,
+                      },
+                      blockExplorerUrls: [CONFIG.NETWORK.BLOCKURLS],
+                    },
+                  ],
+                });
+                dispatch(
+                  connectSuccess({
+                    account: accounts[0],
+                    smartContract: SmartContractObj,
+                    web3: web3,
+                    collectionStatus: currentStatus,
+                    launchDate: dateOfLaunch,
+                    nfts: assets,
+                    networkId: networkId
+                  })
+                );
+              } catch (error) {
+                dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}.`));
+              }
+            }
+          }
+
         }
       } catch (err) {
         dispatch(connectFailed("Something went wrong."));
@@ -137,28 +182,38 @@ export const checkIfWalletIsConnect = () => async (dispatch) => {
     });
     let web3 = new Web3(ethereum);
     const CONFIG = await getConfigData();
-    
-    if (accounts.length && Number(networkId) === Number(CONFIG.NETWORK.ID)) {
+
+    const SmartContract = await getSmartContractInstance();
+    const currentStatus = await SmartContract.methods.paused().call({ from: accounts[0] });
+    const dateOfLaunch = await SmartContract.methods.launchTimestamp().call({ from: accounts[0] });
+
+
+    if (accounts.length && Number(networkId) === web3.utils.hexToNumber(CONFIG.NETWORK.ID)) {
+
       const assets = await getNftTokens(accounts[0]);
-      const SmartContract = await getSmartContractInstance();
-      const currentStatus = await SmartContract.methods.paused().call({ from: accounts[0] });
-      const dateOfLaunch = await SmartContract.methods.launchTimestamp().call({ from: accounts[0] });
-         
-      dispatch(onPageReload({ 
-        account: accounts[0], 
-        nfts: assets, 
+
+      dispatch(onPageReload({
+        account: accounts[0],
+        nfts: assets,
         smartContract: SmartContract,
         collectionStatus: currentStatus,
         launchDate: dateOfLaunch,
         web3: web3,
-        networkId: networkId 
+        networkId: networkId
       }));
 
     } else {
-      dispatch(onPageReloadFail({ networkId: networkId, account: accounts[0] }));
+      dispatch(onPageReloadFail({
+        networkId: networkId,
+        account: accounts[0],
+        smartContract: SmartContract,
+        collectionStatus: currentStatus,
+        launchDate: dateOfLaunch,
+        web3: web3
+      }));
     }
   } catch (error) {
-    
+
     console.log(error);
   }
 };

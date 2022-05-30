@@ -9,6 +9,8 @@ import Gallery from "./components/Gallery";
 import LeaderBoard from "./components/LeaderBoard";
 import styled from "styled-components";
 import UsersNfts from './components/UsersNfts';
+import Ticket from "./components/Ticket";
+
 import { useSelector } from "react-redux";
 
 const AppWrapper = styled.div`
@@ -28,6 +30,7 @@ const App = () => {
         <Routes className="container">
           <Route path="/" element={<Home />} />
           <Route path="/Gallery" element={<Gallery />} />
+          <Route path="/Ticket" element={<Ticket />} />
           <Route path="/Gallery/:address" element={<UsersNfts />} />
           <Route path="/LeaderBoard" element={<LeaderBoard />} />
         </Routes>

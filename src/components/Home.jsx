@@ -124,7 +124,7 @@ function Home() {
   });
 
   const claimNFTs = async () => {
-    let cost = CONFIG.WEI_COST;
+    let cost = data.cost;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -132,6 +132,7 @@ function Home() {
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
+    
     let receipt = await blockchain.smartContract.methods
       .mint(mintAmount)
       .send({
@@ -155,7 +156,7 @@ function Home() {
     if (holder) {
       await updateHolder(from, mintAmount);
     } else {
-      await createNewHolder(from, mintAmount, "none");
+      await createNewHolder(from, mintAmount);
     }
 
     setFeedback(
@@ -200,7 +201,6 @@ function Home() {
     getData();
   }, [blockchain.account]);
 
-  
   return (
     <s.Screen>
       <s.Container
@@ -281,7 +281,7 @@ function Home() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
+                  1 {CONFIG.SYMBOL} costs {data.cost ? blockchain.web3.utils.fromWei(data.cost, 'ether') : "_"}{" "}
                   {CONFIG.NETWORK.SYMBOL}.
                 </s.TextTitle>
                 <s.SpacerXSmall />
