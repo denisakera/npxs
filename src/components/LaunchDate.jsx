@@ -45,11 +45,11 @@ const LaunchDate = () => {
 
     return (
         <div style={{ height: 16, marginBottom: 4 }}>
-            {blockchain.dateOfLaunch !== null &&
+            {blockchain.account && (
                 <s.TextTitle style={styles}>
                     {launchDate}
                 </s.TextTitle>
-            }
+            )}
         </div>
     )
 }

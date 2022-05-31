@@ -17,18 +17,19 @@ const LeaderBoard = () => {
     const [topAddresses, setAddresses] = useState([]);
 
     useEffect(() => {
-        setIsLoading(true);
-        getHolders()
-            .then((result) => {
-                setAddresses(result)
+        
+        const fetchHolders = async () => {
+            try {
+                setIsLoading(true);
+                const res = await getHolders();
+                setAddresses(res);
                 setIsLoading(false);
-            })
-            .catch((err) => {
-                console.log(err)
+            } catch (error) {
+                console.log(error)
                 setIsLoading(false);
-
-            });
-
+            }
+        }
+        fetchHolders();
     }, []);
 
     const Holders = () => {
@@ -44,10 +45,8 @@ const LeaderBoard = () => {
                             Found no NFTs!
                         </s.TextTitle>
                     ) : (
-                        topAddresses?.slice(0, 10).map((addr, index) => {
-                            return <Address key={index} {...addr} />
-                        })
-                    )}
+                        topAddresses?.slice(0, 10).map((addr, index) => (<Address key={index} { ...addr } />)
+                    ))}
                 </BoarderWrapper>
                 <s.SpacerLarge />
             </s.Screen>

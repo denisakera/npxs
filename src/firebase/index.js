@@ -7,6 +7,7 @@ const holdersRef = collection(db, "holders");
 export const getHolders = async () => {
     const data = await getDocs(holdersRef);
     let holders =  data.docs.map((doc) => ({ ...doc.data(), id: doc.id })).sort(function(a, b){return b.pieces_owned-a.pieces_owned});
+    
     return holders;
 }
 

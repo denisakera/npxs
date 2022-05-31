@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { resolveEnsName, shortenAddress } from "../util";
 import QRCode from 'qrcode'
 import { useState, useEffect } from "react";
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 
 const AddressWrapper = styled.div`
     display: flex;
@@ -36,12 +37,12 @@ const AddressWrapper = styled.div`
 const DivWrapper = styled.div`
     width: 50%;
 
-    @media only screen and (max-width:  768px) {
+    @media only screen and (max-width: 768px) {
         width: 50%;
     }
 `;
 
-const QrWrapper = styled.div`
+export const QrWrapper = styled.div`
     margin: 0 5px;
 `
 
@@ -55,6 +56,7 @@ const Address = ({ address, pieces_owned }) => {
         QRCode.toDataURL(`${window.location.origin}/Gallery/${address}`).then(setImgSrc);
     }, [])
 
+    //console.log(resolveEnsName(address))
     return (
         <AddressWrapper style={{
             borderColor: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
@@ -73,7 +75,7 @@ const Address = ({ address, pieces_owned }) => {
                 </s.TextTitle>
             </DivWrapper>
             <QrWrapper>
-                <img src={imgSrc} alt="QR Code" />
+                <Jazzicon diameter={25} seed={jsNumberForAddress(address)} />
             </QrWrapper>
         </AddressWrapper>
     )
