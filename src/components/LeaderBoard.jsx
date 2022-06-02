@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Address from './Address';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getHolders } from '../firebase';
 import Loader from './Loader';
 import { getEvents } from '../util/events';
 
@@ -18,7 +17,8 @@ const LeaderBoard = () => {
     const [topAddresses, setAddresses] = useState([]);
 
     useEffect(() => {
-        
+        const controller = new AbortController();
+
         const fetchHolders = async () => {
             try {
                 setIsLoading(true);
@@ -31,6 +31,9 @@ const LeaderBoard = () => {
             }
         }
         fetchHolders();
+        return () => {
+            controller.abort();
+          };
     }, []);
 
     const Holders = () => {

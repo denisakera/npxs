@@ -1,4 +1,3 @@
-// constants
 import Web3EthContract from "web3-eth-contract";
 import Web3 from "web3";
 import { fetchData } from "../data/dataActions";
@@ -155,7 +154,7 @@ export const connect = () => {
 
 export const updateAccount = (account) => {
   return async (dispatch) => {
-    let assets = await getNftTokens(account);
+    const assets = await getNftTokens(account);
     dispatch(updateAccountRequest({ account: account, nfts: assets }));
     dispatch(fetchData(account));
   };
@@ -201,9 +200,6 @@ export const checkIfWalletIsConnect = () => async (dispatch) => {
       dispatch(onPageReloadFail({
         networkId: networkId,
         account: accounts[0],
-        // smartContract: SmartContract,
-        // collectionStatus: currentStatus,
-        // launchDate: dateOfLaunch,
         web3: web3
       }));
     }

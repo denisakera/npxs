@@ -21,7 +21,11 @@ const Gallery = () => {
     const { account, nfts } = blockchain;
     
     useEffect(() => {
+        const controller = new AbortController();
+
         dispatch(checkIfWalletIsConnect());
+
+        controller.abort();
     }, []);
     
     return (

@@ -98,13 +98,7 @@ export const StyledLink = styled.a`
 `;
 
 function Home() {
-  const dispatch = useDispatch();
-  const blockchain = useSelector((state) => state.blockchain);
-  const data = useSelector((state) => state.data);
-  const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
-  const [mintAmount, setMintAmount] = useState(1);
-  const [CONFIG, SET_CONFIG] = useState({
+  const initState = {
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
     NETWORK: {
@@ -121,7 +115,14 @@ function Home() {
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
-  });
+  };
+  const dispatch = useDispatch();
+  const blockchain = useSelector((state) => state.blockchain);
+  const data = useSelector((state) => state.data);
+  const [claimingNft, setClaimingNft] = useState(false);
+  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
+  const [mintAmount, setMintAmount] = useState(1);
+  const [CONFIG, SET_CONFIG] = useState(initState);
 
   const claimNFTs = () => {
     let cost = blockchain.cost;
@@ -134,27 +135,28 @@ function Home() {
     setClaimingNft(true);
 
     blockchain.smartContract.methods
-      .mint(mintAmount)
-      .send({
-        gasLimit: String(totalGasLimit),
-        to: CONFIG.CONTRACT_ADDRESS,
-        from: blockchain.account,
-        value: totalCostWei,
-      })
-      .once("error", (err) => {
-        console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
-        setClaimingNft(false);
-      })
-      .then((receipt) => {
-        console.log(receipt);
-        setFeedback(
-          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
-        );
-        setClaimingNft(false);
-        dispatch(fetchData(blockchain.account));
-        dispatch(galleryUpdate(blockchain.account));
-      });
+    .mint(mintAmount)
+    .send({
+      gasLimit: String(totalGasLimit),
+      to: CONFIG.CONTRACT_ADDRESS,
+      from: blockchain.account,
+      value: totalCostWei,
+    })
+    .once("error", (err) => {
+      console.log(err);
+      setFeedback("Sorry, something went wrong please try again later.");
+      setClaimingNft(false);
+    })
+    .then((receipt) => {
+      console.log(receipt);
+      setFeedback(
+        `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+      );
+      setClaimingNft(false);
+      dispatch(fetchData(blockchain.account));
+      dispatch(galleryUpdate(blockchain.account));
+    });    
+   
   };
 
   const decrementMintAmount = () => {
@@ -180,14 +182,21 @@ function Home() {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     getConfigData().then((result) => {
       SET_CONFIG(result);
     });
     dispatch(checkIfWalletIsConnect());
+
+    return () => {
+     controller.abort();
+    }
   }, []);
 
   useEffect(() => {
+    const controller = new AbortController();
     getData();
+    controller.abort();
   }, [blockchain.account]);
 
   return (

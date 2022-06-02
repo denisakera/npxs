@@ -10,8 +10,14 @@ const Ticket = () => {
     const myAddress = useSelector((state) => state.blockchain.account);
 
     useEffect(() => {
+        const controller = new AbortController();
+
         if (myAddress) {
             QRCode.toDataURL(`${window.location.origin}/Gallery/${myAddress}`).then(setImgSrc);
+        }
+
+        return () => {
+            controller.abort();
         }
     }, [myAddress])
 

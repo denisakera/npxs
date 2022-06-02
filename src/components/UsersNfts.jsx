@@ -13,6 +13,9 @@ const UsersNfts = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+
+        const controller = new AbortController();
+
         const fetchNfts = async () => {
             try {
                 setIsLoading(true);
@@ -26,6 +29,10 @@ const UsersNfts = () => {
             }
         };
         fetchNfts();
+
+        return () => {
+            controller.abort();
+        }
     }, []);
 
     const Nfts = () => {

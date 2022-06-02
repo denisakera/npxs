@@ -1,56 +1,63 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as s from '../styles/globalStyles';
 import { useSelector } from "react-redux";
 
 const LaunchDate = () => {
+
     const blockchain = useSelector((state) => state.blockchain);
-    const [launchDate, setLaunchDate] = useState(null);
 
-    let countDownDate = new Date(blockchain.dateOfLaunch * 1000).getTime();
-    
-    // Update the count down every 1 second
-    if (blockchain.dateOfLaunch !== null) {
-        const x = setInterval(function () {
+    const calculateTimeLeft = () => {
+        const difference = +new Date(blockchain.dateOfLaunch * 1000).getTime() - +new Date().getTime();
+        let timeLeft = {};
 
-            // Get today's date and time
-            let now = new Date().getTime();
+        if (difference > 0) {
+            timeLeft = {
+                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                minutes: Math.floor((difference / 1000 / 60) % 60),
+                seconds: Math.floor((difference / 1000) % 60),
+            };
+        }
 
-            // Find the distance between now and the count down date
-            let distance = countDownDate - now;
+        return timeLeft;
+    };
 
-            // Time calculations for days, hours, minutes and seconds
-            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-            // Output the result in an element with id="demo"
-            let countDown = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-            setLaunchDate(countDown);
-            
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                setLaunchDate("LAUNCHED");
-                clearInterval(x);
-            }
+    useEffect(() => {
+        setTimeout(() => {
+            setTimeLeft(calculateTimeLeft());
         }, 1000);
-    }
+    });
+
+    const timerComponents = [];
+
+    Object.keys(timeLeft).forEach((interval) => {
+        if (!timeLeft[interval]) {
+            return;
+        }
+
+        timerComponents.push(
+            <span>
+                {timeLeft[interval]} {interval}{" "}
+            </span>
+        );
+    });
 
     let styles = {
-        fontSize: launchDate === "LAUNCHED" ? 20 : 30,
+        fontSize: 25,
         fontWeight: "bold",
     }
-
 
     return (
         <div style={{ height: 16, marginBottom: 4 }}>
             {blockchain.account && (
                 <s.TextTitle style={styles}>
-                    {launchDate}
+                    {timerComponents.length ? timerComponents : "LAUNCHED"}
                 </s.TextTitle>
             )}
         </div>
-    )
+    );
 }
 
 export default LaunchDate;
