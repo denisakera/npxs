@@ -7,6 +7,7 @@ import styled from "styled-components";
 import LaunchDate from "./LaunchDate";
 import { checkHolderExists, createNewHolder, findByAddress, updateHolder } from "../firebase";
 import { getConfigData } from "../redux/blockchain/util";
+import { getEvents } from '../util/events';
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -123,7 +124,7 @@ function Home() {
     SHOW_BACKGROUND: false,
   });
 
-  const claimNFTs = async () => {
+  const claimNFTs = () => {
     let cost = data.cost;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
@@ -132,8 +133,8 @@ function Home() {
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
-    
-    let receipt = await blockchain.smartContract.methods
+
+    blockchain.smartContract.methods
       .mint(mintAmount)
       .send({
         gasLimit: String(totalGasLimit),
@@ -146,26 +147,15 @@ function Home() {
         setFeedback("Sorry, something went wrong please try again later.");
         setClaimingNft(false);
       })
-
-    console.log(receipt);
-    const { from } = receipt;
-
-    let holder = await findByAddress(from);
-    console.log(holder);
-
-    if (holder) {
-      await updateHolder(from, mintAmount);
-    } else {
-      await createNewHolder(from, mintAmount);
-    }
-
-    setFeedback(
-      `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
-    );
-    setClaimingNft(false);
-    dispatch(fetchData(blockchain.account));
-    dispatch(galleryUpdate(blockchain.account));
-
+      .then((receipt) => {
+        console.log(receipt);
+        setFeedback(
+          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+        );
+        setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
+        dispatch(galleryUpdate(blockchain.account));
+      });
   };
 
   const decrementMintAmount = () => {
@@ -201,6 +191,7 @@ function Home() {
     getData();
   }, [blockchain.account]);
 
+
   return (
     <s.Screen>
       <s.Container
@@ -213,11 +204,11 @@ function Home() {
         <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
         <s.SpacerXSmall />
         <div style={{ height: 32 }}>
-        {blockchain.account && (
-          <s.TextTitle>
-          Collection status: {blockchain.collectionStatus ? 'PAUSED' : 'ACTIVE'}
-        </s.TextTitle>
-        )}
+          {blockchain.account && (
+            <s.TextTitle>
+              Collection status: {blockchain.collectionStatus ? 'PAUSED' : 'ACTIVE'}
+            </s.TextTitle>
+          )}
         </div>
         <LaunchDate />
         <s.SpacerSmall />

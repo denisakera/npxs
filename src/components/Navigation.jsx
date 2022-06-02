@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { shortenAddress } from "../util";
-import Jazzicon from 'react-jazzicon';
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 import { connect, checkIfWalletIsConnect } from '../redux/blockchain/blockchainActions';
 import { StyledButton } from "./Home";
 import { fetchData } from "../redux/data/dataActions";
@@ -237,7 +237,7 @@ function Nav() {
                 <DivAddress>
                   {shortenAddress(blockchain.account)}
                   <div style={{ marginLeft: 8 }}>
-                    <Jazzicon diameter={25} seed={blockchain.jazicion} />
+                    <Jazzicon diameter={25} seed={jsNumberForAddress(blockchain.account)} />
                   </div>
                 </DivAddress>
               ) : (

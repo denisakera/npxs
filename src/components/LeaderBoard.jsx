@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getHolders } from '../firebase';
 import Loader from './Loader';
+import { getEvents } from '../util/events';
 
 const BoarderWrapper = styled.div`
     display: flex;
@@ -21,7 +22,7 @@ const LeaderBoard = () => {
         const fetchHolders = async () => {
             try {
                 setIsLoading(true);
-                const res = await getHolders();
+                const res = await getEvents();
                 setAddresses(res);
                 setIsLoading(false);
             } catch (error) {

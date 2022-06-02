@@ -46,17 +46,12 @@ export const QrWrapper = styled.div`
     margin: 0 5px;
 `
 
-const Address = ({ address, pieces_owned }) => {
+const Address = ({ address, pieces_owned, ens_name }) => {
     const myAddress = useSelector((state) => state.blockchain.account);
     let width = screen.width;
 
-    const [imgSrc, setImgSrc] = useState('');
-
-    useEffect(() => {
-        QRCode.toDataURL(`${window.location.origin}/Gallery/${address}`).then(setImgSrc);
-    }, [])
-
-    //console.log(resolveEnsName(address))
+    const ens = resolveEnsName(address);
+    
     return (
         <AddressWrapper style={{
             borderColor: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
@@ -67,7 +62,11 @@ const Address = ({ address, pieces_owned }) => {
                         color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
                         borderColor: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
                     }}>
-                    {resolveEnsName(address)}
+                    {address}
+                </s.TextTitle>
+                <s.TextTitle
+                    style={{ fontSize: 18, color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black' }}>
+                    {ens_name ? ens_name : "No ens_name"}
                 </s.TextTitle>
                 <s.TextTitle
                     style={{ fontSize: 18, color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black' }}>
