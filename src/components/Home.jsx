@@ -184,13 +184,12 @@ function Home() {
     getConfigData().then((result) => {
       SET_CONFIG(result);
     });
-    dispatch(checkIfWalletIsConnect())
+    dispatch(checkIfWalletIsConnect());
   }, []);
 
   useEffect(() => {
     getData();
   }, [blockchain.account]);
-
 
   return (
     <s.Screen>
@@ -204,7 +203,7 @@ function Home() {
         <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
         <s.SpacerXSmall />
         <div style={{ height: 32 }}>
-          {blockchain.account && (
+          {blockchain.smartContract && (
             <s.TextTitle>
               Collection status: {blockchain.collectionStatus ? 'PAUSED' : 'ACTIVE'}
             </s.TextTitle>
@@ -237,7 +236,7 @@ function Home() {
                 color: "var(--accent-text)",
               }}
             >
-              {!blockchain.account ? "_" : data.totalSupply} / {!blockchain.account ? "_" : CONFIG.MAX_SUPPLY}
+              {!data.totalSupply ? "_" : data.totalSupply} / {!data.totalSupply ? "_" : CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{

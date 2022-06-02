@@ -94,12 +94,12 @@ export const connect = () => {
             })
           );
           // Add listeners start
-          ethereum.on("accountsChanged", (accounts) => {
-            dispatch(updateAccount(accounts[0]));
-          });
-          ethereum.on("chainChanged", () => {
-            window.location.reload();
-          });
+          // ethereum.on("accountsChanged", (accounts) => {
+          //   dispatch(updateAccount(accounts[0]));
+          // });
+          // ethereum.on("chainChanged", () => {
+          //   window.location.reload();
+          // });
           // Add listeners end
         } else {
           // Switch network here
@@ -174,22 +174,20 @@ export const galleryUpdate = (account) => {
 
 export const checkIfWalletIsConnect = () => async (dispatch) => {
 
+  if (!ethereum) return;
+  const accounts = await ethereum.request({ method: "eth_accounts" });
+  const networkId = await ethereum.request({
+    method: "net_version",
+  });
+  let web3 = new Web3(ethereum);
+  const CONFIG = await getConfigData();
+
   try {
-    if (!ethereum) return;
-    const accounts = await ethereum.request({ method: "eth_accounts" });
-    const networkId = await ethereum.request({
-      method: "net_version",
-    });
-    let web3 = new Web3(ethereum);
-    const CONFIG = await getConfigData();
-
-    const SmartContract = await getSmartContractInstance();
-    const currentStatus = await SmartContract.methods.paused().call({ from: accounts[0] });
-    const dateOfLaunch = await SmartContract.methods.launchTimestamp().call({ from: accounts[0] });
-
-
     if (accounts.length && Number(networkId) === web3.utils.hexToNumber(CONFIG.NETWORK.ID)) {
 
+      const SmartContract = await getSmartContractInstance();
+      const currentStatus = await SmartContract.methods.paused().call({ from: accounts[0] });
+      const dateOfLaunch = await SmartContract.methods.launchTimestamp().call({ from: accounts[0] });
       const assets = await getNftTokens(accounts[0]);
 
       dispatch(onPageReload({
@@ -206,14 +204,14 @@ export const checkIfWalletIsConnect = () => async (dispatch) => {
       dispatch(onPageReloadFail({
         networkId: networkId,
         account: accounts[0],
-        smartContract: SmartContract,
-        collectionStatus: currentStatus,
-        launchDate: dateOfLaunch,
+        // smartContract: SmartContract,
+        // collectionStatus: currentStatus,
+        // launchDate: dateOfLaunch,
         web3: web3
       }));
     }
   } catch (error) {
 
-    console.log(error);
+    console.log("RELOAD", error);
   }
 };
