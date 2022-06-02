@@ -29,9 +29,6 @@ const AddressWrapper = styled.div`
         width: 100%;
     }
 
-    @media only screen and (max-width:  420px) {
-        flex-direction: column;
-    }
 `;
 
 const DivWrapper = styled.div`
@@ -48,10 +45,16 @@ export const QrWrapper = styled.div`
 
 const Address = ({ address, pieces_owned, ens_name }) => {
     const myAddress = useSelector((state) => state.blockchain.account);
-    let width = screen.width;
+    const [width, setWidth] = useState(window.innerWidth);
 
-    const ens = resolveEnsName(address);
-    
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    });
+
     return (
         <AddressWrapper style={{
             borderColor: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
@@ -62,7 +65,7 @@ const Address = ({ address, pieces_owned, ens_name }) => {
                         color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
                         borderColor: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
                     }}>
-                    {address}
+                    {width > 900 ? address : shortenAddress(address)}
                 </s.TextTitle>
                 <s.TextTitle
                     style={{ fontSize: 18, color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black' }}>
@@ -74,7 +77,7 @@ const Address = ({ address, pieces_owned, ens_name }) => {
                 </s.TextTitle>
             </DivWrapper>
             <QrWrapper>
-                <Jazzicon diameter={25} seed={jsNumberForAddress(address)} />
+                <Jazzicon diameter={35} seed={jsNumberForAddress(address)} />
             </QrWrapper>
         </AddressWrapper>
     )

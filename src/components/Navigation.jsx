@@ -196,8 +196,6 @@ function Nav() {
     getData();
   }, [blockchain.account]);
 
-  //console.log(Number(blockchain.networkId), Number(data.netId))
-
   return (
     <Navigation>
       <div className="logo">
