@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import NFTCard from "./NftCard";
 import { shortenAddress } from "../util";
 import { useSelector } from "react-redux";
-import { checkHolderExists, findByAddress, updateHolder } from "../firebase";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { checkIfWalletIsConnect } from "../redux/blockchain/blockchainActions";

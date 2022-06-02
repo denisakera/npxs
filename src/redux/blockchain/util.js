@@ -11,7 +11,6 @@ export const getConfigData = async () => {
         },
     });
     const CONFIG = await configResponse.json();
-
     return CONFIG;
 }
 
@@ -37,7 +36,15 @@ export const getSmartContractInstance = async () => {
         abi,
         CONFIG.CONTRACT_ADDRESS
     );
-
     return SmartContractObj;
+}
 
+export const getMethodValues = async () => {
+    const SmartContract = await getSmartContractInstance();
+    const currentStatus = await SmartContract.methods.paused().call();
+    const dateOfLaunch = await SmartContract.methods.launchTimestamp().call();
+    const totalSupply = await SmartContract.methods.totalSupply().call();
+    const cost = await SmartContract.methods.cost().call();
+
+    return { currentStatus, dateOfLaunch, totalSupply, cost };
 }

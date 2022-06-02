@@ -7,8 +7,7 @@ const LaunchDate = () => {
     const [launchDate, setLaunchDate] = useState(null);
 
     let countDownDate = new Date(blockchain.dateOfLaunch * 1000).getTime();
-    //"Jan 5, 2024 15:37:25"
-    //blockchain.dateOfLaunch * 1000
+    
     // Update the count down every 1 second
     if (blockchain.dateOfLaunch !== null) {
         const x = setInterval(function () {

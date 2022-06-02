@@ -8,7 +8,9 @@ const initialState = {
   collectionStatus: null,
   dateOfLaunch: null,
   nfts: [],
-  networkId: null
+  networkId: null,
+  cost: 0,
+  totalSupply: 0,
 };
 
 const blockchainReducer = (state = initialState, action) => {
@@ -28,7 +30,9 @@ const blockchainReducer = (state = initialState, action) => {
         collectionStatus: action.payload.collectionStatus,
         dateOfLaunch: action.payload.launchDate,
         nfts: [...action.payload.nfts],
-        networkId: action.payload.networkId
+        networkId: action.payload.networkId,
+        cost: action.payload.cost,
+        totalSupply: action.payload.totalSupply,
       };
     case "CONNECTION_FAILED":
       return {
@@ -57,7 +61,9 @@ const blockchainReducer = (state = initialState, action) => {
         web3: action.payload.web3,
         collectionStatus: action.payload.collectionStatus,
         dateOfLaunch: action.payload.launchDate,
-        networkId: action.payload.networkId
+        networkId: action.payload.networkId,
+        cost: action.payload.cost,
+        totalSupply: action.payload.totalSupply,
       }  
     
     case "PAGE_RELOAD_FAIL":

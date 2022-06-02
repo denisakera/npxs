@@ -5,9 +5,8 @@ import { fetchData } from "../redux/data/dataActions";
 import * as s from "../styles/globalStyles";
 import styled from "styled-components";
 import LaunchDate from "./LaunchDate";
-import { checkHolderExists, createNewHolder, findByAddress, updateHolder } from "../firebase";
 import { getConfigData } from "../redux/blockchain/util";
-import { getEvents } from '../util/events';
+import { DivAddress } from "./Navigation";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -125,7 +124,7 @@ function Home() {
   });
 
   const claimNFTs = () => {
-    let cost = data.cost;
+    let cost = blockchain.cost;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -236,7 +235,7 @@ function Home() {
                 color: "var(--accent-text)",
               }}
             >
-              {!data.totalSupply ? "_" : data.totalSupply} / {!data.totalSupply ? "_" : CONFIG.MAX_SUPPLY}
+              {!blockchain.totalSupply ? "_" : blockchain.totalSupply} / {!blockchain.totalSupply ? "_" : CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
@@ -249,7 +248,7 @@ function Home() {
               </StyledLink>
             </s.TextDescription>
             <s.SpacerSmall />
-            {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+            {Number(blockchain.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
@@ -271,7 +270,7 @@ function Home() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  1 {CONFIG.SYMBOL} costs {data.cost ? blockchain.web3.utils.fromWei(data.cost, 'ether') : "_"}{" "}
+                  1 {CONFIG.SYMBOL} costs {blockchain.cost ? blockchain.web3.utils.fromWei(blockchain.cost, 'ether') : "_"}{" "}
                   {CONFIG.NETWORK.SYMBOL}.
                 </s.TextTitle>
                 <s.SpacerXSmall />
@@ -293,15 +292,39 @@ function Home() {
                       Connect to the {CONFIG.NETWORK.NAME} network
                     </s.TextDescription>
                     <s.SpacerSmall />
-                    <StyledButton
-                      onClick={(e) => {
-                        e.preventDefault();
-                        dispatch(connect());
-                        getData();
-                      }}
-                    >
-                      CONNECT
-                    </StyledButton>
+                    {Number(blockchain.networkId) === Number(data.netId) ? (
+                      <StyledButton
+                        onClick={(e) => {
+                          e.preventDefault();
+                          dispatch(connect());
+                          getData();
+                        }}
+                      >
+                        CONNECT
+                      </StyledButton>
+                    ) : (
+                      <>
+                        {blockchain.loading ? (
+                          <s.TextDescription
+                            style={{ textAlign: "center", color: "var(--accent-text)" }}>
+                            Loading...
+                          </s.TextDescription>
+                        ) : (
+                          <DivAddress
+                            style={{
+                              color: 'red',
+                              cursor: 'pointer'
+                            }} onClick={(e) => {
+                              e.preventDefault();
+                              dispatch(connect());
+                              getData();
+                            }}>
+                            Switch Network
+                          </DivAddress>
+                        )}
+                      </>
+                    )}
+
                     {blockchain.errorMsg !== "" ? (
                       <>
                         <s.SpacerSmall />

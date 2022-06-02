@@ -1,6 +1,9 @@
 // log
 import { store } from "../store";
 import { getConfigData } from "../blockchain/util";
+import Web3 from "web3";
+
+const { ethereum } = window;
 
 const fetchDataRequest = () => {
   return {
@@ -23,26 +26,29 @@ const fetchDataFailed = (payload) => {
 };
 
 export const fetchData = () => {
+  
+
   return async (dispatch) => {
     dispatch(fetchDataRequest());
+    let web3 = new Web3(ethereum);
+
     try {
-     const totalSupply = await store
-        .getState()
-        .blockchain.smartContract.methods.totalSupply()
-        .call();
-      const cost = await store
-        .getState()
-        .blockchain.smartContract.methods.cost()
-        .call();
+    //  const totalSupply = await store
+    //     .getState()
+    //     .blockchain.smartContract.methods.totalSupply()
+    //     .call();
+    //   const cost = await store
+    //     .getState()
+    //     .blockchain.smartContract.methods.cost()
+    //     .call();
 
       const CONFIG = await getConfigData();
-      const netId = await store
-      .getState().blockchain.web3.utils.hexToNumber(CONFIG.NETWORK.ID);
+      const netId = web3.utils.hexToNumber(CONFIG.NETWORK.ID);
 
       dispatch(
         fetchDataSuccess({
-          totalSupply: totalSupply,
-          cost: cost,
+          // totalSupply: totalSupply,
+          // cost: cost,
           netId: netId
         })
       );

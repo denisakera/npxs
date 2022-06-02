@@ -3,7 +3,7 @@ import Web3EthContract from "web3-eth-contract";
 import Web3 from "web3";
 import { fetchData } from "../data/dataActions";
 import { getNftTokens } from "../../api";
-import { getABI, getConfigData, getSmartContractInstance } from "./util";
+import { getABI, getConfigData, getMethodValues, getSmartContractInstance } from "./util";
 
 const { ethereum } = window;
 
@@ -78,9 +78,9 @@ export const connect = () => {
 
           const SmartContractObj = await getSmartContractInstance();
 
-          let currentStatus = await SmartContractObj.methods.paused().call({ from: accounts[0] });
-          let dateOfLaunch = await SmartContractObj.methods.launchTimestamp().call({ from: accounts[0] });
-          let assets = await getNftTokens(accounts[0]);
+        const assets = await getNftTokens(accounts[0]);
+        const { currentStatus, dateOfLaunch, cost, totalSupply } = await getMethodValues();
+
 
           dispatch(
             connectSuccess({
@@ -90,17 +90,12 @@ export const connect = () => {
               collectionStatus: currentStatus,
               launchDate: dateOfLaunch,
               nfts: assets,
-              networkId: networkId
+              networkId: networkId,
+              cost: cost,
+              totalSupply: totalSupply,
             })
           );
-          // Add listeners start
-          // ethereum.on("accountsChanged", (accounts) => {
-          //   dispatch(updateAccount(accounts[0]));
-          // });
-          // ethereum.on("chainChanged", () => {
-          //   window.location.reload();
-          // });
-          // Add listeners end
+          
         } else {
           // Switch network here
           try {
@@ -141,6 +136,7 @@ export const connect = () => {
                     networkId: networkId
                   })
                 );
+
               } catch (error) {
                 dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}.`));
               }
@@ -186,8 +182,7 @@ export const checkIfWalletIsConnect = () => async (dispatch) => {
     if (accounts.length && Number(networkId) === web3.utils.hexToNumber(CONFIG.NETWORK.ID)) {
 
       const SmartContract = await getSmartContractInstance();
-      const currentStatus = await SmartContract.methods.paused().call({ from: accounts[0] });
-      const dateOfLaunch = await SmartContract.methods.launchTimestamp().call({ from: accounts[0] });
+      const { currentStatus, dateOfLaunch, cost, totalSupply } = await getMethodValues();
       const assets = await getNftTokens(accounts[0]);
 
       dispatch(onPageReload({
@@ -197,7 +192,9 @@ export const checkIfWalletIsConnect = () => async (dispatch) => {
         collectionStatus: currentStatus,
         launchDate: dateOfLaunch,
         web3: web3,
-        networkId: networkId
+        networkId: networkId,
+        cost: cost,
+        totalSupply: totalSupply
       }));
 
     } else {
@@ -212,6 +209,7 @@ export const checkIfWalletIsConnect = () => async (dispatch) => {
     }
   } catch (error) {
 
-    console.log("RELOAD", error);
+    console.log(error);
   }
+  dispatch(fetchData(accounts[0]));
 };

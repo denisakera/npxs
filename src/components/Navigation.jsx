@@ -9,6 +9,7 @@ import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 import { connect, checkIfWalletIsConnect } from '../redux/blockchain/blockchainActions';
 import { StyledButton } from "./Home";
 import { fetchData } from "../redux/data/dataActions";
+import * as s from '../styles/globalStyles';
 
 const Navigation = styled.header`
   width: 100%;
@@ -161,7 +162,7 @@ const Button = styled.button`
   border: none;
 `
 
-const DivAddress = styled.div`
+export const DivAddress = styled.div`
   border: 1px solid;
   padding: 5px 10px;
   background-color: white;
@@ -176,7 +177,6 @@ function Nav() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const dispatch = useDispatch();
-
 
   function handleToggle() {
     setIsExpanded(!isExpanded);
@@ -195,6 +195,8 @@ function Nav() {
   useEffect(() => {
     getData();
   }, [blockchain.account]);
+
+  //console.log(Number(blockchain.networkId), Number(data.netId))
 
   return (
     <Navigation>
@@ -223,7 +225,14 @@ function Nav() {
             <li>Ticket</li>
           </NavLink>
           {!blockchain.account ? (
-            <StyledButton
+            <>
+            {blockchain.loading ? (
+              <s.TextDescription 
+              style={{ textAlign: "center", color: "var(--accent-text)" }}>
+                  Loading...
+              </s.TextDescription>
+            ) : (
+              <StyledButton
               onClick={(e) => {
                 e.preventDefault();
                 dispatch(connect());
@@ -231,6 +240,9 @@ function Nav() {
               }}
 
             >Connect</StyledButton>
+            )}
+            </>
+            
           ) : (
             <>
               {Number(blockchain.networkId) === Number(data.netId) ? (
