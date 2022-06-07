@@ -33,10 +33,12 @@ export const fetchData = () => {
 
       const CONFIG = await getConfigData();
       const netId = web3.utils.hexToNumber(CONFIG.NETWORK.ID);
+      const nftName = CONFIG.NFT_NAME;
 
       dispatch(
         fetchDataSuccess({
-          netId: netId
+          netId: netId,
+          nftName: nftName
         })
       );
     } catch (err) {

@@ -6,21 +6,22 @@ import { ResponsiveWrapper } from './Gallery';
 import { shortenAddress } from '../util';
 import NFTCard from './NftCard';
 import Loader from './Loader';
+import { recoverAddress } from '../util/signature';
 
 const UsersNfts = () => {
     const [usersNFTs, setUsersNFTs] = useState([]);
-    const { address } = useParams();
+    const { signature } = useParams();
     const [isLoading, setIsLoading] = useState(false);
+    const [addr, setAddr] = useState('');
 
     useEffect(() => {
-
-        const controller = new AbortController();
-
         const fetchNfts = async () => {
             try {
                 setIsLoading(true);
+                const address = await recoverAddress(signature);
+                setAddr(address);
                 const assets = await getNftTokens(address);
-                setUsersNFTs(assets);
+                setUsersNFTs([...assets]);
                 setIsLoading(false);
 
             } catch (err) {
@@ -30,16 +31,13 @@ const UsersNfts = () => {
         };
         fetchNfts();
 
-        return () => {
-            controller.abort();
-        }
     }, []);
 
     const Nfts = () => {
         return (
             <s.Screen style={{ backgroundColor: "#cecece" }}>
             <s.TextTitle>
-                {shortenAddress(address)}
+                {addr && shortenAddress(addr)}
             </s.TextTitle>
             <s.TextDescription>
                 Has {usersNFTs.length} NFTS

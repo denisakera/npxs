@@ -2,7 +2,8 @@ const initialState = {
   loading: false,
   error: false,
   errorMsg: "",
-  netId: null
+  netId: null,
+  nftName: ""
 };
 
 const dataReducer = (state = initialState, action) => {
@@ -20,7 +21,8 @@ const dataReducer = (state = initialState, action) => {
         loading: false,
         error: false,
         errorMsg: "",
-        netId: action.payload.netId
+        netId: action.payload.netId,
+        nftName: action.payload.nftName
       };
     case "CHECK_DATA_FAILED":
       return {
