@@ -426,9 +426,19 @@ function Home() {
               color: "var(--primary-text)",
             }}
           >
+            Let them eat NFT pintxos!
+Explore the NFTs with your taste buds. 
+Every Crypto Pintxo is a unique recipe with pixelated representation that may become a real meal on July 18th based on your likes.
+It will also serve as an entry into Metaverse restaurant by Basque Culinary Institute.
+By buying Pintxo NFTs you will decide which  combinations will make it to the dinner table.
+10 owners of the largest collections will be invited to a special dinner at the Basque Culinary Institute to taste the NFTs.
+By minting Crypto Pintxos, you will gain unique recipe how to make your own pintxo.
+You can also use the Pintxo NFT to feed your PFP, give someone a present, or interact with algo-generated and 3D scanned pintxos in the metaverse restaurant in the metaverse. 
+
+
             Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
-            Once you make the purchase, you cannot undo this action.
+            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. 
+            Please note: Once you make the purchase, you cannot undo this action.
           </s.TextDescription>
           <s.SpacerSmall />
           <s.TextDescription
