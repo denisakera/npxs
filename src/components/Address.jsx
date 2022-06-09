@@ -14,11 +14,11 @@ const AddressWrapper = styled.div`
     margin: 10px 0;
     padding: 3px 5px;
     width: 70%;
-    background-color: #dbd7d7;
+    background-color: #F2F4F3;
     transition: background-color 0.3s;
 
     &:hover {
-        background-color: #cfcaca;
+        background-color: #F0C808;
     }
 
     @media only screen and (max-width:  1024px) {

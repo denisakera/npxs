@@ -38,12 +38,12 @@ const LeaderBoard = () => {
 
     const Holders = () => {
         return (
-            <s.Screen style={{ backgroundColor: "#cecece" }}>
+            <s.Screen style={{ backgroundColor: "#F2F4F3" }}>
                 <s.TextTitle>
                     Top 10 Ownerships
                 </s.TextTitle>
                 <s.SpacerMedium />
-                <BoarderWrapper style={{ backgroundColor: "#cecece" }}>
+                <BoarderWrapper style={{ backgroundColor: "#F2F4F3" }}>
                     {topAddresses?.length === 0 ? (
                         <s.TextTitle>
                             Found no NFTs!
