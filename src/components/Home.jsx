@@ -205,7 +205,7 @@ function Home() {
         flex={1}
         ai={"center"}
         jc={"center"}
-        style={{ padding: 24, backgroundColor: "#cecece" }}
+        style={{ padding: 24, backgroundColor: "#F2F4F3" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
         <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />

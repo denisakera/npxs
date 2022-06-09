@@ -78,7 +78,7 @@ export const StyledClickable = styled.div`
 export const Loader = styled.div`
   border: 5px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 5px solid #3498db;
+  border-top: 5px solid #06AED5;
   width: 40px;
   height: 40px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
