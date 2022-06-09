@@ -428,7 +428,7 @@ function Home() {
           >
             Let them eat NFT pintxos!
 Explore the NFTs with your taste buds. 
-Every Crypto Pintxo is a unique recipe with pixelated representation that may become a real meal on July 18th based on your likes.
+Every Crypto Pintxo BLA BLA BLA is a unique recipe with pixelated representation that may become a real meal on July 18th based on your likes.
 It will also serve as an entry into Metaverse restaurant by Basque Culinary Institute.
 By buying Pintxo NFTs you will decide which  combinations will make it to the dinner table.
 10 owners of the largest collections will be invited to a special dinner at the Basque Culinary Institute to taste the NFTs.
