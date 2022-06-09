@@ -32,7 +32,7 @@ const Ticket = () => {
 
     return (
         <s.Screen style={{ 
-            backgroundColor: "#cecece", 
+            backgroundColor: "#F0C808", 
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center' }}

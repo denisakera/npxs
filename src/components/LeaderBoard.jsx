@@ -38,7 +38,7 @@ const LeaderBoard = () => {
 
     const Holders = () => {
         return (
-            <s.Screen style={{ backgroundColor: "#F2F4F3" }}>
+            <s.Screen style={{ backgroundColor: "#06AED5" }}>
                 <s.TextTitle>
                     Top 10 Ownerships
                 </s.TextTitle>

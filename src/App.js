@@ -51,7 +51,7 @@ const App = () => {
 
   return (
     <Router>
-      <AppWrapper style={{ backgroundColor: "#cecece" }}>
+      <AppWrapper style={{ backgroundColor: "#F0C808" }}>
         <Nav />
         <Routes className="container">
           <Route path="/" element={<Home />} />

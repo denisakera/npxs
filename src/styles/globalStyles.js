@@ -52,14 +52,14 @@ export const Container = styled.div`
 
 export const TextTitle = styled.p`
   color: var(--primary-text);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.6;
 `;
 
 export const TextSubTitle = styled.p`
   color: var(--primary-text);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.6;
 `;
 
@@ -78,7 +78,7 @@ export const StyledClickable = styled.div`
 export const Loader = styled.div`
   border: 5px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 5px solid #06AED5;
+  border-top: 5px solid #3498db;
   width: 40px;
   height: 40px;
   -webkit-animation: spin 2s linear infinite; /* Safari */

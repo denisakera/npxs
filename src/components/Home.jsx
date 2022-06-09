@@ -15,15 +15,15 @@ export const StyledButton = styled.button`
   padding: 10px;
   border-radius: 50px;
   border: none;
-  background-color: var(--secondary);
+  background-color: #086788;
   padding: 10px;
   font-weight: bold;
   color: var(--secondary-text);
   width: 100px;
   cursor: pointer;
-  box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
+  box-shadow: 0px 6px 0px -2px rgba(6, 174, 213, 0.3);
+  -webkit-box-shadow: 0px 6px 0px -2px rgba(6, 174, 213, 0.3);
+  -moz-box-shadow: 0px 6px 0px -2px rgba(6, 174, 213, 0.3);
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -46,9 +46,9 @@ export const StyledRoundButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+  box-shadow: 0px 4px 0px -2px rgba(6, 174, 213, 0.3);
+  -webkit-box-shadow: 0px 4px 0px -2px rgba(6, 174, 213, 0.3);
+  -moz-box-shadow: 0px 4px 0px -2px rgba(6, 174, 213, 0.3);
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -78,7 +78,7 @@ export const StyledLogo = styled.img`
 `;
 
 export const StyledImg = styled.img`
-  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 5px 11px 2px rgba(221, 28, 26, 0.7);
   border: 4px dashed var(--secondary);
   background-color: var(--accent);
   border-radius: 100%;
@@ -205,7 +205,7 @@ function Home() {
         flex={1}
         ai={"center"}
         jc={"center"}
-        style={{ padding: 24, backgroundColor: "#F2F4F3" }}
+        style={{ padding: 24, backgroundColor: "#F0C808" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
         <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
@@ -229,17 +229,17 @@ function Home() {
             jc={"center"}
             ai={"center"}
             style={{
-              backgroundColor: "var(--accent)",
+              backgroundColor: "#06AED5",
               padding: 24,
               borderRadius: 24,
               border: "4px dashed var(--secondary)",
-              boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
+              boxShadow: "0px 5px 11px 2px rgba(221, 28, 26, 0.7)",
             }}
           >
             <s.TextTitle
               style={{
                 textAlign: "center",
-                fontSize: 50,
+                fontSize: 20,
                 fontWeight: "bold",
                 color: "var(--accent-text)",
               }}

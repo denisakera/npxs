@@ -17,7 +17,7 @@ const Navigation = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 140px;
+  height: 100px;
 
   .logo a {
     padding-top: 33px;
@@ -49,21 +49,21 @@ const Navigation = styled.header`
     }
   }
   .gray {
-    color: #ccc;
+    color: #F2F4F3;
   }
   a {
-    color: #222;
-    opacity: 0.55;
+    color: #DD1C1A;
+    opacity: 1;
     transition: all 0.6s;
-    color: #222;
-    font-size: 1em;
+    color: #DD1C1A;
+    font-size: 2.5em;
   }
   a:hover {
-    opacity: 1;
+    opacity: 0.4;
   }
   .fa-bars {
     display: none;
-    color: #222;
+    color: #06AED5;
     font-size: 2rem;
   }
   nav {
@@ -75,21 +75,21 @@ const Navigation = styled.header`
     li {
       margin: 0 15px;
       justify-content: space-between;
-      font-size: 1em;
+      font-size: 0.6em;
     }
     a {
-      font-size: 1em;
+      font-size: 2.5em;
       text-decoration: none;
       .active {
-        color: tomato;
+        color: white;
       }
     }
     a.active {
-      color: #222;
+      color: #06AED5;
     }
   }
 
-  @media only screen and (max-width:  768px) {
+  @media only screen and (max-width:  400px) {
     height: auto;
     min-height: 50px;
     display: block;
@@ -200,7 +200,7 @@ function Nav() {
     <Navigation>
       <div className="logo">
         <Link to="/">
-          <p>NFT PINTXO</p>
+          <p>CRYPTO PINTXOS</p>
         </Link>
       </div>
       <nav className="nav">
