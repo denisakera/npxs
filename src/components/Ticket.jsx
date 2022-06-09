@@ -3,30 +3,54 @@ import { QrWrapper } from './Address';
 import QRCode from 'qrcode'
 import { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
+import { signTicket } from '../util/signature';
+import { StyledButton } from './Home';
 
 const Ticket = () => {
     const [imgSrc, setImgSrc] = useState('');
 
     const myAddress = useSelector((state) => state.blockchain.account);
+    const nftName = useSelector((state) => state.data.nftName);
+
+    const sign = async () => {
+     const signature = await signTicket(myAddress, nftName);
+     const dataUrl = await QRCode.toDataURL(`${window.location.origin}/Gallery/${signature}`);
+     setImgSrc(dataUrl);  
+    }
 
     useEffect(() => {
         const controller = new AbortController();
 
-        if (myAddress) {
-            QRCode.toDataURL(`${window.location.origin}/Gallery/${myAddress}`).then(setImgSrc);
+        if (myAddress && nftName) {
+            setImgSrc('')
         }
 
         return () => {
             controller.abort();
         }
-    }, [myAddress])
+    }, [myAddress]);
 
     return (
-        <s.Screen style={{ backgroundColor: "#cecece", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <s.Screen style={{ 
+            backgroundColor: "#cecece", 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center' }}
+            >
             {myAddress ? (
-                <QrWrapper>
-                    <img src={imgSrc} />
-                </QrWrapper>
+                <>
+                    {!imgSrc ? (
+                        <StyledButton
+                        onClick={sign}
+                        >
+                            Sign Ticket
+                            </StyledButton>
+                    ) : (
+                        <QrWrapper>
+                            <img src={imgSrc} />
+                        </QrWrapper>
+                    )}
+                </>
             ) : (
                 <s.TextTitle style={{
                     color: 'red',

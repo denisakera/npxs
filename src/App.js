@@ -57,7 +57,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/Gallery" element={<Gallery />} />
           <Route path="/Ticket" element={<Ticket />} />
-          <Route path="/Gallery/:address" element={<UsersNfts />} />
+          <Route path="/Gallery/:signature" element={<UsersNfts />} />
           <Route path="/LeaderBoard" element={<LeaderBoard />} />
         </Routes>
       </AppWrapper>
