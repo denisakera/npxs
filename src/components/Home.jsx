@@ -243,7 +243,7 @@ function Home() {
         <div style={{ height: 50 }}>
           {blockchain.smartContract && (
             <s.TextTitle>
-              Collection status: {blockchain.collectionStatus ? 'PAUSED' : 'ACTIVE'}
+              { canMint ? 'Minting is active' : 'Minting will start on'}
             </s.TextTitle>
           )}
         </div>
