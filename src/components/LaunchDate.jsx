@@ -55,12 +55,17 @@ const LaunchDate = () => {
         <div style={{ height: 40, marginBottom:    80 }}>
             {blockchain.account && (
                 <s.TextTitle style={styles}>
+                { timerComponents.length ? 'Minting will start on' : ''}
+                </s.TextTitle>
+            )}
+            {blockchain.account && (
+                <s.TextTitle style={styles}>
                     {timerComponents.length ? "Wed Jun 15 2022 17:00:00 (CEST)" : ""}
                 </s.TextTitle>
             )}
             {blockchain.account && (
                 <s.TextTitle style={styles}>
-                    {timerComponents.length ? timerComponents : "LAUNCHED"}
+                    {(timerComponents.length) ? timerComponents : "LAUNCHED"}
                 </s.TextTitle>
             )}
 

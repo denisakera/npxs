@@ -169,24 +169,18 @@ function Home() {
       if (difference > 0) {
         return false;
       }
-      const collectionStatus = (blockchain.collectionStatus);
-      
-      if (collectionStatus){
-        
-        return false;
-      }
+
       if (claimingNft){
         return false;
       }
       
-      return false;
+      return true;
   };
 
   const [canMint, setCanMint] = useState(launchStatus());
 
   useEffect(() => {
       setTimeout(() => {
-        console.log("Can mint: ", launchStatus());
         setCanMint(launchStatus());
       }, 1000);
   });
@@ -243,7 +237,7 @@ function Home() {
         <div style={{ height: 50 }}>
           {blockchain.smartContract && (
             <s.TextTitle>
-              { canMint ? '' : 'Minting will start on'}
+              { blockchain.collectionStatus ? 'Minting is paused.' : ''}
             </s.TextTitle>
           )}
         </div>
