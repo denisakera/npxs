@@ -160,6 +160,37 @@ function Home() {
    
   };
 
+  
+
+  const launchStatus = () => {
+      const difference = +new Date(blockchain.dateOfLaunch * 1000).getTime() - +new Date().getTime();
+      let timeLeft = {};
+
+      if (difference > 0) {
+        return false;
+      }
+      const collectionStatus = (blockchain.collectionStatus);
+      
+      if (collectionStatus){
+        
+        return false;
+      }
+      if (claimingNft){
+        return false;
+      }
+      
+      return false;
+  };
+
+  const [canMint, setCanMint] = useState(launchStatus());
+
+  useEffect(() => {
+      setTimeout(() => {
+        console.log("Can mint: ", launchStatus());
+        setCanMint(launchStatus());
+      }, 1000);
+  });
+
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
     if (newMintAmount < 1) {
@@ -392,14 +423,14 @@ function Home() {
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledButton
-                        disabled={claimingNft ? 1 : 0}
+                        disabled={canMint ? 0 : 1}
                         onClick={(e) => {
                           e.preventDefault();
                           claimNFTs();
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                         {canMint ? (claimingNft ? "BUSY" : "BUY"): "Wait for launch"} 
                       </StyledButton>
                     </s.Container>
                   </>
