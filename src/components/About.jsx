@@ -17,7 +17,7 @@ import { checkIfWalletIsConnect } from "../redux/blockchain/blockchainActions";
                    Edible and tokenized worlds will collide on July 18th in San Sebastian, Spain...
             </s.TextTitle>
 <s.TextDescription style={{ textAlign: "justify", paddingLeft: "300px", paddingRight: "300px" }}
-                >Each of our <span style={{fontWeight: 'bold'}}>410 Crypto Pintxos</span> that you will mint or buy is a unique recipe with a pixelated representation of the ingredients.
+                >Each of our <span style={{fontWeight: 'bold'}}>400 Crypto Pintxos</span> that you will mint or buy is a unique recipe with a pixelated representation of the ingredients.
 Five will become a real meal on <span style={{fontWeight: 'bold'}}>July 18th NFT food insurrection at the legendary Basque Culinary Center restaurant</span> in San Sebastian.
 They will be offered as a set <span style={{fontWeight: 'bold'}}>dinner for 10 guests that own the largest collection of Crypto Pintxos</span> tracked over our LeaderBoard which will close on July 10th at 10 am CET.
 </s.TextDescription>
