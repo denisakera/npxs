@@ -7,6 +7,7 @@ import { fetchData } from "./redux/data/dataActions";
 import Nav from "./components/Navigation";
 // PAGES
 import Home from "./components/Home";
+import About from "./components/About";
 import Gallery from "./components/Gallery";
 import LeaderBoard from "./components/LeaderBoard";
 import styled from "styled-components";
@@ -55,6 +56,7 @@ const App = () => {
         <Nav />
         <Routes className="container">
           <Route path="/" element={<Home />} />
+          <Route path="/About" element={<About />} />
           <Route path="/Gallery" element={<Gallery />} />
           <Route path="/Ticket" element={<Ticket />} />
           <Route path="/Gallery/:signature" element={<UsersNfts />} />

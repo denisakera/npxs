@@ -29,7 +29,7 @@ const Gallery = () => {
     }, []);
     
     return (
-        <s.Screen style={{ backgroundColor: "#F0C808" }}>
+        <s.Screen style={{ backgroundColor: "#F2F4F3", padding: 40 }}>
             <s.TextTitle>
                 {account && shortenAddress(account)}
             </s.TextTitle>
@@ -39,7 +39,7 @@ const Gallery = () => {
             <s.Container
                 flex={1}
                 ai={"center"}
-                style={{ paddingTop: 24, backgroundColor: "#F0C808" }}
+                style={{ paddingTop: 24, backgroundColor: "#F2F4F3" }}
             //image={"/config/images/bg.png"}
             >
                 <ResponsiveWrapper>

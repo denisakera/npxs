@@ -32,7 +32,7 @@ const Ticket = () => {
 
     return (
         <s.Screen style={{ 
-            backgroundColor: "#F0C808", 
+            backgroundColor: "#F2F4F3", 
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center' }}
@@ -53,11 +53,11 @@ const Ticket = () => {
                 </>
             ) : (
                 <s.TextTitle style={{
-                    color: 'red',
-                    border: '1px solid',
+                    color: '#DD1C1A',
+                    border: '5px solid',
                     padding: 5
                 }}>
-                    PLease connect Wallet!
+                    Please connect your Wallet!
                 </s.TextTitle>
             )}
         </s.Screen>

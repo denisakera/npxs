@@ -59,7 +59,7 @@ const Navigation = styled.header`
     font-size: 2.5em;
   }
   a:hover {
-    opacity: 0.4;
+    opacity: 1;
   }
   .fa-bars {
     display: none;
@@ -75,13 +75,13 @@ const Navigation = styled.header`
     li {
       margin: 0 15px;
       justify-content: space-between;
-      font-size: 0.6em;
+      font-size: 1.5em;
     }
     a {
-      font-size: 2.5em;
+      font-size: 1.5em;
       text-decoration: none;
       .active {
-        color: white;
+        color: tomato;
       }
     }
     a.active {
@@ -89,7 +89,7 @@ const Navigation = styled.header`
     }
   }
 
-  @media only screen and (max-width:  400px) {
+  @media only screen and (max-width:  768px) {
     height: auto;
     min-height: 50px;
     display: block;
@@ -158,7 +158,7 @@ const Button = styled.button`
   margin: 0px 0px;
   width: 100%;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 10px;
   border: none;
 `
 
@@ -210,7 +210,7 @@ function Nav() {
           onClick={handleToggle}
         />
         <ul className={`collapsed ${isExpanded ? "is-expanded" : ""}`}>
-          <NavLink to="/">
+         <NavLink to="/">
             <li>Mint</li>
           </NavLink>
           <NavLink to="/Gallery">
@@ -221,6 +221,9 @@ function Nav() {
           </NavLink>
           <NavLink to="/Ticket">
             <li>Ticket</li>
+          </NavLink>
+          <NavLink to="/About">
+            <li>About</li>
           </NavLink>
           {!blockchain.account ? (
             <>

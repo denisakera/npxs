@@ -12,14 +12,15 @@ const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
 export const StyledButton = styled.button`
-  padding: 10px;
-  border-radius: 50px;
+  padding: 1px;
+  border-radius: 10px;
   border: none;
   background-color: #086788;
-  padding: 10px;
+  font-size:1em;
+  padding: 20px;
   font-weight: bold;
   color: var(--secondary-text);
-  width: 100px;
+  width: 200px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(6, 174, 213, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(6, 174, 213, 0.3);
@@ -206,11 +207,9 @@ function Home() {
         ai={"center"}
         jc={"center"}
         style={{ padding: 24, backgroundColor: "#F0C808" }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
-      >
-        <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
-        <s.SpacerXSmall />
-        <div style={{ height: 32 }}>
+        //image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
+      > <s.SpacerXSmall />
+        <div style={{ height: 50 }}>
           {blockchain.smartContract && (
             <s.TextTitle>
               Collection status: {blockchain.collectionStatus ? 'PAUSED' : 'ACTIVE'}
@@ -230,8 +229,8 @@ function Home() {
             ai={"center"}
             style={{
               backgroundColor: "#06AED5",
-              padding: 24,
-              borderRadius: 24,
+              padding: 10,
+              borderRadius: 100,
               border: "4px dashed var(--secondary)",
               boxShadow: "0px 5px 11px 2px rgba(221, 28, 26, 0.7)",
             }}
@@ -419,39 +418,6 @@ function Home() {
           </s.Container>
         </ResponsiveWrHomeer>
         <s.SpacerMedium />
-        <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-            Let them eat NFT pintxos!
-Explore the NFTs with your taste buds. 
-Every Crypto Pintxo BLA BLA BLA is a unique recipe with pixelated representation that may become a real meal on July 18th based on your likes.
-It will also serve as an entry into Metaverse restaurant by Basque Culinary Institute.
-By buying Pintxo NFTs you will decide which  combinations will make it to the dinner table.
-10 owners of the largest collections will be invited to a special dinner at the Basque Culinary Institute to taste the NFTs.
-By minting Crypto Pintxos, you will gain unique recipe how to make your own pintxo.
-You can also use the Pintxo NFT to feed your PFP, give someone a present, or interact with algo-generated and 3D scanned pintxos in the metaverse restaurant in the metaverse. 
-
-
-            Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. 
-            Please note: Once you make the purchase, you cannot undo this action.
-          </s.TextDescription>
-          <s.SpacerSmall />
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
-            successfully mint your NFT. We recommend that you don't lower the
-            gas limit.
-          </s.TextDescription>
-        </s.Container>
       </s.Container>
     </s.Screen>
   );

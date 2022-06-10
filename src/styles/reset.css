@@ -82,7 +82,7 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 50%;
+  font-size: 20%;
   font: inherit;
   vertical-align: baseline;
 }
@@ -124,8 +124,8 @@ table {
 }
 
 @font-face {
-  font-family: "coder";
-  src: local("coder"), url(font.woff) format("woff");
+  font-family: "Bilbao Regular";
+  src: local("Bilbao Regular"), url(font.woff) format("woff");
 }
 
 body {

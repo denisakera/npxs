@@ -35,7 +35,7 @@ const UsersNfts = () => {
 
     const Nfts = () => {
         return (
-            <s.Screen style={{ backgroundColor: "#cecece" }}>
+            <s.Screen style={{ backgroundColor: "#F2F4F3" }}>
             <s.TextTitle>
                 {addr && shortenAddress(addr)}
             </s.TextTitle>
@@ -45,7 +45,7 @@ const UsersNfts = () => {
             <s.Container
                 flex={1}
                 ai={"center"}
-                style={{ paddingTop: 24, backgroundColor: "#cecece" }}
+                style={{ paddingTop: 24, backgroundColor: "#F2F4F3" }}
             //image={"/config/images/bg.png"}
             >
                 <ResponsiveWrapper>
