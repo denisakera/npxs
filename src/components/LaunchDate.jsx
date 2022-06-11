@@ -17,8 +17,9 @@ const LaunchDate = () => {
                 minutes: Math.floor((difference / 1000 / 60) % 60),
                 seconds: Math.floor((difference / 1000) % 60),
             };
-        }
 
+        }
+        
         return timeLeft;
     };
 
@@ -47,15 +48,27 @@ const LaunchDate = () => {
     let styles = {
         fontSize: 25,
         fontWeight: "bold",
+        textAlign: "center",
     }
 
     return (
-        <div style={{ height: 16, marginBottom: 4 }}>
+        <div style={{ height: 40, marginBottom:    80 }}>
             {blockchain.account && (
                 <s.TextTitle style={styles}>
-                    {timerComponents.length ? timerComponents : "LAUNCHED"}
+                { timerComponents.length ? 'Minting will start on' : ''}
                 </s.TextTitle>
             )}
+            {blockchain.account && (
+                <s.TextTitle style={styles}>
+                    {timerComponents.length ? "Wed Jun 15 2022 17:00:00 (CEST)" : ""}
+                </s.TextTitle>
+            )}
+            {blockchain.account && (
+                <s.TextTitle style={styles}>
+                    {(timerComponents.length) ? timerComponents : "LAUNCHED"}
+                </s.TextTitle>
+            )}
+
         </div>
     );
 }

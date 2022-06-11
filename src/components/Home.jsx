@@ -160,6 +160,31 @@ function Home() {
    
   };
 
+  
+
+  const launchStatus = () => {
+      const difference = +new Date(blockchain.dateOfLaunch * 1000).getTime() - +new Date().getTime();
+      let timeLeft = {};
+
+      if (difference > 0) {
+        return false;
+      }
+
+      if (claimingNft){
+        return false;
+      }
+      
+      return true;
+  };
+
+  const [canMint, setCanMint] = useState(launchStatus());
+
+  useEffect(() => {
+      setTimeout(() => {
+        setCanMint(launchStatus());
+      }, 1000);
+  });
+
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
     if (newMintAmount < 1) {
@@ -170,8 +195,8 @@ function Home() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 10) {
-      newMintAmount = 10;
+    if (newMintAmount > 5) {
+      newMintAmount = 5;
     }
     setMintAmount(newMintAmount);
   };
@@ -212,7 +237,7 @@ function Home() {
         <div style={{ height: 50 }}>
           {blockchain.smartContract && (
             <s.TextTitle>
-              Collection status: {blockchain.collectionStatus ? 'PAUSED' : 'ACTIVE'}
+              { blockchain.collectionStatus ? 'Minting is paused.' : ''}
             </s.TextTitle>
           )}
         </div>
@@ -392,14 +417,14 @@ function Home() {
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledButton
-                        disabled={claimingNft ? 1 : 0}
+                        disabled={canMint ? 0 : 1}
                         onClick={(e) => {
                           e.preventDefault();
                           claimNFTs();
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                         { claimingNft  ? "BUSY" : (canMint ?   "BUY" : "WAIT FOR LAUNCH") } 
                       </StyledButton>
                     </s.Container>
                   </>

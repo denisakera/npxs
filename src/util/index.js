@@ -1,5 +1,11 @@
 import { ethers } from "ethers";
-const provider = new ethers.providers.Web3Provider(window.ethereum);
+if(window.ethereum) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+} else {
+  
+    const provider = null;
+}
+
 import ENS, { getEnsAddress } from '@ensdomains/ensjs'
 
 
@@ -15,5 +21,5 @@ export const resolveEnsName = async (address) => {
 
 /**Shorten address */
 export const shortenAddress = (address) => {
-  return `${address.slice(0, 7)}...${address.slice(address.length - 6)}`;
+  return `${address.slice(0, 6)}...${address.slice(address.length - 4)}`;
 };
