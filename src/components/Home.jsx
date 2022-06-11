@@ -30,6 +30,17 @@ export const StyledButton = styled.button`
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
   }
+
+  @media (max-width: 942px) {
+    width: 150px;
+    padding: 15px;
+  }
+
+  @media (max-width: 890px) {
+    width: 100px;
+    padding: 12px;
+  }
+
 `;
 
 export const StyledRoundButton = styled.button`
