@@ -26,12 +26,13 @@ const Navigation = styled.header`
     clear: both;
     padding-bottom: 30px;
     text-decoration: none;
-
+    font-weight: bold;
     p {
       display: block;
     }
     em {
-      font-size: 1em;
+      font-size: 2em;
+      font-weight: bold;
       float: left;
       display: block;
       color: blue;
@@ -56,7 +57,7 @@ const Navigation = styled.header`
     opacity: 1;
     transition: all 0.6s;
     color: #DD1C1A;
-    font-size: 2.5em;
+    font-size: 1.5em;
   }
   a:hover {
     opacity: 1;
@@ -75,11 +76,12 @@ const Navigation = styled.header`
     li {
       margin: 0 15px;
       justify-content: space-between;
-      font-size: 1.5em;
+      font-size: 1em;
     }
     a {
       font-size: 1.5em;
       text-decoration: none;
+      font-weight: bold;
       .active {
         color: tomato;
       }
