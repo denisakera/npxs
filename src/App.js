@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { checkIfWalletIsConnect, updateAccount } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
-
+import * as s from "./styles/globalStyles";
 // NAVIGATION
 import Nav from "./components/Navigation";
 // PAGES
@@ -13,7 +13,7 @@ import LeaderBoard from "./components/LeaderBoard";
 import styled from "styled-components";
 import UsersNfts from './components/UsersNfts';
 import Ticket from "./components/Ticket";
-
+import Footer from "./components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 
 const AppWrapper = styled.div`
@@ -53,6 +53,7 @@ const App = () => {
   return (
     <Router>
       <AppWrapper style={{ backgroundColor: "#F0C808" }}>
+      <s.Screen>
         <Nav />
         <Routes className="container">
           <Route path="/" element={<Home />} />
@@ -62,6 +63,8 @@ const App = () => {
           <Route path="/Gallery/:signature" element={<UsersNfts />} />
           <Route path="/LeaderBoard" element={<LeaderBoard />} />
         </Routes>
+        <Footer />
+        </s.Screen>
       </AppWrapper>
     </Router>
   )
