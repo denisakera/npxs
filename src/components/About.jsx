@@ -28,7 +28,7 @@ Let us know which pixels will taste best.
 After July 18th, Crypto Pintxos NFTS will also serve as a ticket to Basque Culinary Center metaverse restaurant that we plan to open later in 2022.
           </s.TextDescription>
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <img alt={"example"} src={"/config/images/pintxos_nft_samples.png"} />
+            <img style={{maxHeight:"100%", maxWidth:"100%", padding: "20px"}} alt={"example"} src={"/config/images/pintxos_nft_samples.png"} />
           </s.Container>
 
           <s.TextTitle  style={{ textAlign: "justify",  padding: "20px", fontWeight: 'bold' }}
