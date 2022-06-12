@@ -7,7 +7,14 @@ const LaunchDate = () => {
     const blockchain = useSelector((state) => state.blockchain);
 
     const calculateTimeLeft = () => {
-        const difference = +new Date(blockchain.dateOfLaunch * 1000).getTime() - +new Date().getTime();
+        var difference =  +new Date(1655305200 * 1000).getTime() - +new Date().getTime();
+        
+     
+        if (blockchain.dateOfLaunch != null)
+        {
+             difference = +new Date(blockchain.dateOfLaunch * 1000).getTime() - +new Date().getTime();
+        }
+        
         let timeLeft = {};
 
         if (difference > 0) {
@@ -19,7 +26,7 @@ const LaunchDate = () => {
             };
 
         }
-        
+
         return timeLeft;
     };
 
@@ -53,21 +60,21 @@ const LaunchDate = () => {
 
     return (
         <div style={{ height: 40, marginBottom:    80 }}>
-            {blockchain.account && (
+
                 <s.TextTitle style={styles}>
                 { timerComponents.length ? 'Minting will start on' : ''}
                 </s.TextTitle>
-            )}
-            {blockchain.account && (
+
+            
                 <s.TextTitle style={styles}>
                     {timerComponents.length ? "Wed Jun 15 2022 17:00:00 (CEST)" : ""}
                 </s.TextTitle>
-            )}
-            {blockchain.account && (
+
+            
                 <s.TextTitle style={styles}>
                     {(timerComponents.length) ? timerComponents : "LAUNCHED"}
                 </s.TextTitle>
-            )}
+
 
         </div>
     );
