@@ -45,27 +45,41 @@ export const Container = styled.div`
   align-items: ${({ ai }) => (ai ? ai : "flex-start")};
   background-color: ${({ test }) => (test ? "pink" : "none")};
   width: 100%;
+
   background-image: ${({ image }) => (image ? `url(${image})` : "none")};
   background-size: cover;
   background-position: center;
 `;
-
+export const PageContainer = styled.div`
+  display: flex;
+  flex: ${({ flex }) => (flex ? flex : 0)};
+  flex-direction: ${({ fd }) => (fd ? fd : "column")};
+  justify-content: ${({ jc }) => (jc ? jc : "flex-start")};
+  align-items: ${({ ai }) => (ai ? ai : "flex-start")};
+  background-color: var(--secondary-background);
+  width: 100%;
+  padding: 30px;
+  min-height: 70vh;
+  background-image: ${({ image }) => (image ? `url(${image})` : "none")};
+  background-size: cover;
+  background-position: center;
+`;
 export const TextTitle = styled.p`
   color: var(--primary-text);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 500;
   line-height: 1.6;
 `;
 
 export const TextSubTitle = styled.p`
   color: var(--primary-text);
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
 `;
 
 export const TextDescription = styled.p`
   color: var(--primary-text);
-  font-size: 14px;
+  font-size: 18 px;
   line-height: 1.6;
 `;
 

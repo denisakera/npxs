@@ -29,7 +29,8 @@ const Gallery = () => {
     }, []);
     
     return (
-        <s.Screen style={{ backgroundColor: "#F2F4F3", padding: 40 }}>
+
+            <s.PageContainer style={{ height:"100%", backgroundColor: "#F2F4F3", padding: 40 }}>
             <s.TextTitle>
                 {account && shortenAddress(account)}
             </s.TextTitle>
@@ -52,7 +53,8 @@ const Gallery = () => {
                     )}
                 </ResponsiveWrapper>
             </s.Container>
-        </s.Screen>
+            </s.PageContainer>
+
     )
 }
 

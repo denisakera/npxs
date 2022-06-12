@@ -9,7 +9,7 @@ import { checkIfWalletIsConnect } from "../redux/blockchain/blockchainActions";
 
   const About = () =>   {
   return (
-           <s.Screen style={{ backgroundColor: "#F2F4F3" }}>
+           <s.PageContainer>
                 <s.TextTitle  style={{ textAlign: "justify",  padding: "20px",fontWeight: 'bold' }}
                 >
                    <p>Let them eat NFT pintxos!</p>
@@ -48,7 +48,7 @@ Where?
 ><a href="https://twitter.com/crypto_pintxos" class="twitter-follow-button" data-show-count="false">Follow Crypto Pintxos on Twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <p><a href="https://t.me/crypto_pintxos">Follow Crypto Pintxos Telegram channel</a></p>
 </s.TextDescription>
-</s.Screen>
+</s.PageContainer>
   );
 }
 export default About;

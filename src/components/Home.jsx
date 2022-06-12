@@ -113,6 +113,7 @@ function Home() {
     WEI_COST: 0,
     DISPLAY_COST: 0,
     GAS_LIMIT: 0,
+    LAUNCH_DATE: 0,
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
@@ -226,7 +227,7 @@ function Home() {
   }, [blockchain.account]);
 
   return (
-    <s.Screen>
+
       <s.Container
         flex={1}
         ai={"center"}
@@ -444,7 +445,7 @@ function Home() {
         </ResponsiveWrHomeer>
         <s.SpacerMedium />
       </s.Container>
-    </s.Screen>
+
   );
 }
 

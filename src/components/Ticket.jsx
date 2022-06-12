@@ -31,8 +31,7 @@ const Ticket = () => {
     }, [myAddress]);
 
     return (
-        <s.Screen style={{ 
-            backgroundColor: "#F2F4F3", 
+        <s.PageContainer style={{ 
             display: 'flex', 
             justifyContent: 'center', 
             alignItems: 'center' }}
@@ -47,7 +46,7 @@ const Ticket = () => {
                             </StyledButton>
                     ) : (
                         <QrWrapper>
-                            <img src={imgSrc} />
+                            <img  style={{zoom: 2, imageRendering: 'pixelated' }} src={imgSrc} />
                         </QrWrapper>
                     )}
                 </>
@@ -60,7 +59,7 @@ const Ticket = () => {
                     Please connect your Wallet!
                 </s.TextTitle>
             )}
-        </s.Screen>
+        </s.PageContainer>
     )
 }
 
