@@ -58,7 +58,7 @@ export const PageContainer = styled.div`
   align-items: ${({ ai }) => (ai ? ai : "flex-start")};
   background-color: var(--secondary-background);
   width: 100%;
-  padding: 30px;
+  padding: 40px;
   min-height: 70vh;
   background-image: ${({ image }) => (image ? `url(${image})` : "none")};
   background-size: cover;

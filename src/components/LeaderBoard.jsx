@@ -40,13 +40,13 @@ const LeaderBoard = () => {
         return (
             <s.PageContainer>
                 <s.TextTitle>
-                    Top 10 Ownerships
+                Top 10 Ownerships
                 </s.TextTitle>
                 <s.SpacerMedium />
                 <BoarderWrapper style={{ backgroundColor: "#F2F4F3" }}>
                     {topAddresses?.length === 0 ? (
                         <s.TextTitle>
-                            Found no NFTs!
+                            No NFT owners yet! Check back after the collection launch date. ;)
                         </s.TextTitle>
                     ) : (
                         topAddresses?.slice(0, 10).map((addr, index) => (<Address key={index} { ...addr } />)
