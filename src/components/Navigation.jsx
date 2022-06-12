@@ -227,6 +227,7 @@ function Nav() {
           <NavLink to="/About">
             <li>About</li>
           </NavLink>
+          <li>
           {!blockchain.account ? (
             <>
             {blockchain.loading ? (
@@ -269,6 +270,7 @@ function Nav() {
               )}
             </>
           )}
+          </li>
         </ul>
       </nav>
     </Navigation>
