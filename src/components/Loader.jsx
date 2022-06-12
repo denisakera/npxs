@@ -2,10 +2,10 @@ import * as s from '../styles/globalStyles';
 
 const Loader = () => {
     return (
-        <s.Screen 
+        <s.Container 
         style={{ backgroundColor: "#F2F4F3 ", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <s.Loader />
-        </s.Screen>
+        </s.Container>
     )
 }
 
