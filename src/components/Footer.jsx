@@ -1,19 +1,33 @@
 import * as s from "../styles/globalStyles";
-
+import styled from 'styled-components';
+import { SocialIcon } from "../react-social-icons/react-social-icons";
+export const DivAddress = styled.div`
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
   const Footer = () =>   {
   return (
-
-         <s.Container style={{ 
-            flex: 1,
-            justifyContent: 'flex-end',
-            marginBottom: 90.
+<s.Container>
+         <DivAddress style={{ 
+            padding: '10px'
             }}>
-<s.TextDescription
-                  style={{ textAlign: "justify", paddingLeft: "20px", paddingRight: "10px" }}
-><a href="https://twitter.com/crypto_pintxos" class="twitter-follow-button" data-show-count="false">Follow Crypto Pintxos on Twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<p><a href="https://t.me/crypto_pintxos">Follow Crypto Pintxos Telegram channel</a></p>
-</s.TextDescription>
-</s.Container>       
+
+<SocialIcon style={{margin:'10px'}} bgColor="#000000" network="twitter" url="https://twitter.com/crypto_pintxos" />
+
+<SocialIcon  style={{margin:'10px'}} bgColor="#000000"network="telegram" url="https://t.me/crypto_pintxos" />
+
+<SocialIcon  style={{margin:'10px'}} bgColor="#000000"  network="email" url="crypto.pintxos@gmail.com" />              
+                
+
+
+
+
+
+</DivAddress>
+<s.TextDescription>Crypto Pintxos is a project of LABe Digital Gastronomy Lab at Basque Culinary Center,  Center for Distributed Ledger Technology at the University of Malta and Speculative Futures Tel Aviv (2022)</s.TextDescription>
+</s.Container >       
   );
 }
 export default Footer;
