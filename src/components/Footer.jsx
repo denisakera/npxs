@@ -18,7 +18,7 @@ export const DivAddress = styled.div`
 
 <SocialIcon  style={{margin:'10px'}} bgColor="#000000"network="telegram" url="https://t.me/crypto_pintxos" />
 
-<SocialIcon  style={{margin:'10px'}} bgColor="#000000"  network="email" url="crypto.pintxos@gmail.com" />              
+<SocialIcon  style={{margin:'10px'}} bgColor="#000000"  network="email" url="mailto:crypto.pintxos@gmail.com" />              
                 
 
 
