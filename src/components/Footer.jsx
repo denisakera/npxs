@@ -9,7 +9,11 @@ export const DivAddress = styled.div`
 `
   const Footer = () =>   {
   return (
-<s.Container>
+<s.Container  style={{ 
+            flex: 1,
+            justifyContent: 'flex-end',
+            marginBottom: 30.
+            }}>
          <DivAddress style={{ 
             padding: '10px'
             }}>
