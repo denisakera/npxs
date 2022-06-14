@@ -159,7 +159,6 @@ const Button = styled.button`
   padding: 8px 10px;
   margin: 0px 0px;
   width: 100%;
-  font-weight: bold;
   border-radius: 10px;
   border: none;
 `
@@ -214,9 +213,6 @@ function Nav() {
         <ul className={`collapsed ${isExpanded ? "is-expanded" : ""}`}>
          <NavLink to="/">
             <li>Mint</li>
-          </NavLink>
-          <NavLink to="/Gallery">
-            <li>Gallery</li>
           </NavLink>
           <NavLink to="/LeaderBoard">
             <li>LeaderBoard</li>
