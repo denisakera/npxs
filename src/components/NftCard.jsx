@@ -3,7 +3,6 @@ import * as s from '../styles/globalStyles';
 import { AiOutlineLink } from 'react-icons/ai';
 import { HiExternalLink } from 'react-icons/hi';
 
-
 const CardWrapper = styled.div`
   overflow: hidden;
   padding: 0 0 32px;
@@ -38,9 +37,9 @@ const StyledLink = styled.div`
   padding: 5px 5px;
 `;
 
-const NFTCard = ({ name, collection, permalink, image_preview_url, token_id}) => {
+const NFTCard = ({ name, permalink, image_preview_url, token_id}) => {
     return (
-        <CardWrapper id={`${collection.slug}_${token_id}`}>
+        <CardWrapper id={`${token_id}`}>
         <CardImage background={image_preview_url} />
         <s.TextDescription>
             {name}

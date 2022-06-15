@@ -7,7 +7,7 @@ export const signTicket = async (address, message) => {
             throw new Error("No crypto wallet found. Please install it.");
 
         const web3 = new Web3(Web3.givenProvider);
-        const signature = await web3.eth.personal.sign(message, address, 'SECRET');
+        const signature = await web3.eth.personal.sign(message, address, 'CryptoPintos');
 
         return signature;
 
