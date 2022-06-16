@@ -1,7 +1,6 @@
 import * as s from '../styles/globalStyles'
 import styled from 'styled-components';
 import Address from './Address';
-import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Loader from './Loader';
 import { getEvents } from '../util/events';
@@ -9,6 +8,7 @@ import { getEvents } from '../util/events';
 const BoarderWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    padding: 0px 5px;
 `;
 
 const LeaderBoard = () => {
@@ -38,7 +38,7 @@ const LeaderBoard = () => {
 
     const Holders = () => {
         return (
-            <s.PageContainer>
+            <s.Screen >
                 <s.TextTitle>
                 Top 10 Ownerships
                 </s.TextTitle>
@@ -46,14 +46,14 @@ const LeaderBoard = () => {
                 <BoarderWrapper style={{ backgroundColor: "#F2F4F3" }}>
                     {topAddresses?.length === 0 ? (
                         <s.TextTitle>
-                            No NFT owners yet! Check back after the collection launch date. ;)
+                            No NFT owners yet! Check back after the collection launch date.
                         </s.TextTitle>
                     ) : (
                         topAddresses?.slice(0, 10).map((addr, index) => (<Address key={index} { ...addr } />)
                     ))}
                 </BoarderWrapper>
                 <s.SpacerLarge />
-            </s.PageContainer>
+            </s.Screen>
         )
     }
 
