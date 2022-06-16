@@ -424,7 +424,7 @@ function Home() {
                           getData();
                         }}
                       >
-                         {canMint ? (claimingNft ? "BUSY" : "BUY"): "Wait for launch"} 
+                         { claimingNft  ? "BUSY" : (canMint ?   "BUY" : "WAIT FOR LAUNCH") } 
                       </StyledButton>
                     </s.Container>
                   </>
