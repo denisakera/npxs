@@ -22,7 +22,11 @@ export const DivAddress = styled.div`
 
 <SocialIcon  style={{margin:'10px'}} bgColor="#000000"network="telegram" url="https://t.me/crypto_pintxos" />
 
-<SocialIcon  style={{margin:'10px'}} bgColor="#000000"  network="email" url="mailto:crypto.pintxos@gmail.com" />              
+<SocialIcon  style={{margin:'10px'}} bgColor="#000000"network="opensea" url="https://opensea.io/collection/crypto-pintxos" />
+
+<SocialIcon  style={{margin:'10px'}} bgColor="#000000"network="polygon" url="https://polygonscan.com/address/0xbcc035a522c0550dfdaf3ba2c70cf5ef00f7d610" />
+
+<SocialIcon  style={{margin:'10px'}} label='e-mail' bgColor="#000000"  network="email" url="mailto:crypto.pintxos@gmail.com" />              
                 
 
 
