@@ -1,7 +1,6 @@
 import * as s from '../styles/globalStyles'
 import styled from 'styled-components';
 import Address from './Address';
-import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Loader from './Loader';
 import { getEvents } from '../util/events';
@@ -9,6 +8,7 @@ import { getEvents } from '../util/events';
 const BoarderWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    padding: 0px 5px;
 `;
 
 const LeaderBoard = () => {
@@ -38,7 +38,7 @@ const LeaderBoard = () => {
 
     const Holders = () => {
         return (
-            <s.PageContainer>
+            <s.Screen >
                 <s.TextTitle>
                 Top 10 Ownerships
                 </s.TextTitle>
@@ -53,7 +53,7 @@ const LeaderBoard = () => {
                     ))}
                 </BoarderWrapper>
                 <s.SpacerLarge />
-            </s.PageContainer>
+            </s.Screen>
         )
     }
 

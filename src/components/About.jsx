@@ -1,11 +1,4 @@
 import * as s from "../styles/globalStyles";
-import styled from 'styled-components';
-import NFTCard from "./NftCard";
-import { shortenAddress } from "../util";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { checkIfWalletIsConnect } from "../redux/blockchain/blockchainActions";
 
 const About = () => {
   return (
@@ -15,8 +8,8 @@ const About = () => {
         <p>Let them eat NFT pintxos!</p>
 
         <p>Explore NFTs with your taste buds.</p>
-        <s.SpacerMedium />
       </s.TextTitle>
+      <s.SpacerMedium />
       <s.TextDescription style={{ textAlign: "justify" }}
       >
         <p>Edible and tokenized worlds will collide on July 18th in San Sebastian, Spain...</p>

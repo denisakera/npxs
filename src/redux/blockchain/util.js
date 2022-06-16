@@ -1,5 +1,4 @@
 import Web3EthContract from "web3-eth-contract";
-import Web3 from "web3";
 
 const { ethereum } = window;
 

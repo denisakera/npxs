@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import * as s from '../styles/globalStyles';
 import { useSelector } from "react-redux";
-import { resolveEnsName, shortenAddress } from "../util";
-import QRCode from 'qrcode'
+import { shortenAddress } from "../util";
 import { useState, useEffect } from "react";
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 
@@ -22,7 +21,7 @@ const AddressWrapper = styled.div`
     }
 
     @media only screen and (max-width:  1024px) {
-        width: 80%;
+        width: 100%;
     }
 
     @media only screen and (max-width:  768px) {
@@ -69,7 +68,7 @@ const Address = ({ address, pieces_owned, ens_name }) => {
                 </s.TextTitle>
                 <s.TextTitle
                     style={{ fontSize: 18, color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black' }}>
-                    {ens_name ? ens_name : "No ens_name"}
+                    {ens_name === 'None' ? "No ens_name" : ens_name}
                 </s.TextTitle>
                 <s.TextTitle
                     style={{ fontSize: 18, color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black' }}>

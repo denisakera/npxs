@@ -91,6 +91,19 @@ const Navigation = styled.header`
     }
   }
 
+  @media (min-width: 768px) and (max-width: 1024px) {
+    nav {
+      li {
+        font-size: 0.6em;
+      }
+    }
+    div {
+      p {
+        font-size: 0.7em;
+      }
+    }
+  }
+
   @media only screen and (max-width:  768px) {
     height: auto;
     min-height: 50px;
@@ -151,18 +164,6 @@ const Navigation = styled.header`
     }
   }
 `;
-
-const Button = styled.button`
-  cursor: pointer;
-  background-color: blue;
-  color: white;
-  padding: 8px 10px;
-  margin: 0px 0px;
-  width: 100%;
-  font-weight: bold;
-  border-radius: 10px;
-  border: none;
-`
 
 export const DivAddress = styled.div`
   border: 1px solid;
@@ -227,7 +228,7 @@ function Nav() {
           <NavLink to="/About">
             <li>About</li>
           </NavLink>
-          <li>
+          <div>
           {!blockchain.account ? (
             <>
             {blockchain.loading ? (
@@ -270,7 +271,7 @@ function Nav() {
               )}
             </>
           )}
-          </li>
+          </div>
         </ul>
       </nav>
     </Navigation>
