@@ -214,6 +214,9 @@ function Nav() {
          <NavLink to="/">
             <li>Mint</li>
           </NavLink>
+          <NavLink to="/Gallery">
+            <li>Gallery</li>
+          </NavLink>          
           <NavLink to="/LeaderBoard">
             <li>LeaderBoard</li>
           </NavLink>
