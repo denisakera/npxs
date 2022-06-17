@@ -41,7 +41,7 @@ const LeaderBoard = () => {
             
             <s.PageContainer >
                 <s.TextTitle>
-                Top 10 owners
+                Top {Math.min(topAddresses?.length,10)} owners
                 </s.TextTitle>
                 <s.SpacerMedium />
                 <BoarderWrapper style={{ backgroundColor: "#F2F4F3" }}>
