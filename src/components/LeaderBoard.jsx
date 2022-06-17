@@ -38,9 +38,10 @@ const LeaderBoard = () => {
 
     const Holders = () => {
         return (
-            <s.Screen >
+            
+            <s.PageContainer >
                 <s.TextTitle>
-                Top 10 Ownerships
+                Top 10 owners
                 </s.TextTitle>
                 <s.SpacerMedium />
                 <BoarderWrapper style={{ backgroundColor: "#F2F4F3" }}>
@@ -49,11 +50,11 @@ const LeaderBoard = () => {
                             No NFT owners yet! Check back after the collection launch date.
                         </s.TextTitle>
                     ) : (
-                        topAddresses?.slice(0, 10).map((addr, index) => (<Address key={index} { ...addr } />)
+                        topAddresses?.slice(0, 10).map((addr, index) => ( <Address key={index} { ...addr } /> )
                     ))}
                 </BoarderWrapper>
                 <s.SpacerLarge />
-            </s.Screen>
+            </s.PageContainer>
         )
     }
 

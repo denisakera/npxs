@@ -12,7 +12,6 @@ const AddressWrapper = styled.div`
     border-style: solid;
     margin: 10px 0;
     padding: 3px 5px;
-    width: 70%;
     background-color: #F2F4F3;
     transition: background-color 0.3s;
 
@@ -31,10 +30,10 @@ const AddressWrapper = styled.div`
 `;
 
 const DivWrapper = styled.div`
-    width: 50%;
+    width: 100%;
 
     @media only screen and (max-width: 768px) {
-        width: 50%;
+        width: 100%;
     }
 `;
 
@@ -42,7 +41,7 @@ export const QrWrapper = styled.div`
     margin: 0 5px;
 `
 
-const Address = ({ address, pieces_owned, ens_name }) => {
+const Address = ({ index, address, pieces_owned, ens_name }) => {
     const myAddress = useSelector((state) => state.blockchain.account);
     const [width, setWidth] = useState(window.innerWidth);
 
@@ -58,26 +57,29 @@ const Address = ({ address, pieces_owned, ens_name }) => {
         <AddressWrapper style={{
             borderColor: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
         }}>
+            <QrWrapper>
+                <Jazzicon diameter={35} seed={jsNumberForAddress(address)} />
+            </QrWrapper>            
             <DivWrapper>
                 <s.TextTitle
                     style={{
                         color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
                         borderColor: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black',
+
                     }}>
                     {width > 900 ? address : shortenAddress(address)}
                 </s.TextTitle>
                 <s.TextTitle
                     style={{ fontSize: 18, color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black' }}>
-                    {ens_name === 'None' ? "No ens_name" : ens_name}
-                </s.TextTitle>
+                    Owns {pieces_owned}                  {pieces_owned <2  ? 'piece' : 'pieces'}
+                </s.TextTitle>                
                 <s.TextTitle
                     style={{ fontSize: 18, color: myAddress?.toLowerCase() === address.toLowerCase() ? 'blue' : 'black' }}>
-                    Pieces Owned: {pieces_owned}
+                    {ens_name === 'None' ? '\u00A0' : ens_name}
                 </s.TextTitle>
+
             </DivWrapper>
-            <QrWrapper>
-                <Jazzicon diameter={35} seed={jsNumberForAddress(address)} />
-            </QrWrapper>
+
         </AddressWrapper>
     )
 }
