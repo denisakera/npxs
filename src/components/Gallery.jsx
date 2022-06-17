@@ -32,15 +32,12 @@ const Gallery = () => {
 
             <s.PageContainer style={{ height:"100%", backgroundColor: "#F2F4F3", padding: 40 }}>
             <s.TextTitle>
-                {account && shortenAddress(account)}
+                You own {nfts.length} {nfts.length>1?"NFTs":"NFT"}. {nfts.length<1?" Why don't you mint some? ;)":""}
             </s.TextTitle>
-            <s.TextDescription>
-                Found {nfts.length} NFTS..
-            </s.TextDescription>
             <s.Container
                 flex={1}
                 ai={"center"}
-                style={{ paddingTop: 24, backgroundColor: "#F2F4F3" }}
+                style={{ backgroundColor: "#F2F4F3" }}
             //image={"/config/images/bg.png"}
             >
                 <ResponsiveWrapper>

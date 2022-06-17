@@ -27,6 +27,7 @@ export const getNftTokens = async (walletAddress) => {
 
     let metadataObj = {
       name: tokenMetadata["name"], 
+      description: tokenMetadata["description"],       
       image_preview_url: `https://ipfs.io/ipfs/${tokenMetadata["image"].split("ipfs://")[1]}`, 
       token_id: tokenId,
       permalink: `https://opensea.io/assets/${contractAddress}/${tokenId}`,
