@@ -1,5 +1,5 @@
 export const getEvents = async () => {
-  const url = 'https://npxs.herokuapp.com/data/leaderboard.json';
+  const url = 'https://cryptopintxos.github.io/leaderboard.json';
 
   const holdersData = await fetch(url + '?'+(new Date()).getTime(), {
     headers: {
