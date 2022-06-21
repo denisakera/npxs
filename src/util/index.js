@@ -21,5 +21,5 @@ export const resolveEnsName = async (address) => {
 
 /**Shorten address */
 export const shortenAddress = (address) => {
-  return `${address.slice(0, 7)}...${address.slice(address.length - 6)}`;
+  return `${address.slice(0, 6)}...${address.slice(address.length - 4)}`;
 };
