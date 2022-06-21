@@ -144,12 +144,13 @@ function Home() {
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
+    //get gas price from {"safeLow":50.1,"standard":96.1,"fast":96.6,"fastest":96.6,"blockTime":3,"blockNumber":29803558}
     
     blockchain.smartContract.methods
     .mint(mintAmount)
     .send({
-      gasLimit: String(totalGasLimit+6),
-      gas: '0x92709',
+      gasLimit: String(totalGasLimit),
+      gas: String(totalGasLimit),
       gasPrice: '0xC27090001',
       to: CONFIG.CONTRACT_ADDRESS,
       from: blockchain.account,
