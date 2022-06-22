@@ -1,5 +1,5 @@
 export const getEvents = async () => {
-  const url = 'https://cryptopintxos.github.io/leaderboard.json';
+  const url = 'http://35.209.23.31/data/leaderboard.json';
 
 
 
