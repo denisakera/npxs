@@ -40,9 +40,13 @@ const LeaderBoard = () => {
         return (
             
             <s.PageContainer >
-                <s.TextTitle>
-                Top {Math.min(topAddresses?.length,10)} owners
+                <s.TextTitle style={{ textAlign: "justify", fontWeight: 'bold' }}>
+                Top {Math.min(topAddresses?.length,10)} Ownerships (snapshotted on 10th July 2022, 23:59 (CEST))
                 </s.TextTitle>
+                <s.TextTitle>
+                    If you are one of the holders, congratilations! <br />You've are eligible to participate at the exclusive dinner. <br />
+                    Please contact Erich Eichstetter from the Basque Culinary Center at <a target="_blank" href="email:eeichstetter@bculinary.com">eeichstetter@bculinary.com</a> to confirm your participation.
+                </s.TextTitle>                     
                 <s.SpacerMedium />
                 <BoarderWrapper style={{ backgroundColor: "#F2F4F3" }}>
                     {topAddresses?.length === 0 ? (
